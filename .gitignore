@@ -12,6 +12,9 @@
 /[Uu]ser[Ss]ettings/
 /Assets/Prefab/
 /Assets/CustomAssets/
+/Assets/Plugins/
+/Assets/PluginYourGames/
+/Assets/WebGLTemplates/
 *.log
 
 # MemoryCaptures can get excessive in size.
