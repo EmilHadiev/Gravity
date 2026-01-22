@@ -16,6 +16,8 @@
 /Assets/PluginYourGames/
 /Assets/WebGLTemplates/
 /Assets/Resources_Moved/
+/Assets/AddressableAssetsData/
+/Assets/Resources/
 *.log
 
 # MemoryCaptures can get excessive in size.
