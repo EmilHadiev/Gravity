@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour, IMovable
 {
-    [SerializeField] private float _moveSpeed = 10;
-    [SerializeField] private float _rotateSpeed = 15;
+    private IMovePattern _movePattern;
+    private IPlayerAnimator _animator;
+    private PlayerData _playerData;
 
     public Transform Transform => transform;
 
-    public float MoveSpeed => _moveSpeed;
-    public float RotateSpeed => _rotateSpeed;
-
-    private IMovePattern _movePattern;
-    private IPlayerAnimator _animator;
+    public float MoveSpeed => _playerData.MoveSpeed;
+    public float RotateSpeed => _playerData.RotateSpeed;
 
     private void Awake()
     {
-        _animator = GetComponent<PlayerAnimator>();
+        IPlayer player = GetComponent<IPlayer>();
+
+        _playerData = player.Data;
+        _animator = player.Animator;
+
         _movePattern = new PlayerMovePattern(this, _animator);
     }
 
