@@ -4,24 +4,25 @@ using Zenject;
 
 public class SwordsRotator : MonoBehaviour
 {
-    [SerializeField] private AssetProvider.Swords _swords;
-    [SerializeField] private float _attackSpeed;
     [SerializeField] private SwordSpawnPoint _spawnPoint;
 
     [Inject] private readonly IFactory _factory;
 
     private Sword _sword;
-
+    private PlayerData _data;
 
     private void Awake()
     {
+        IPlayer player = GetComponent<IPlayer>();
+        _data = player.Data;
+
         CreateSwords().Forget();
     }
 
     private async UniTask CreateSwords()
     {
-        var prefab = await _factory.CreateAsync(_swords.ToString());
-        prefab.transform.parent = transform;
+        var prefab = await _factory.CreateAsync(_data.Swords.ToString());
+        prefab.transform.parent = _spawnPoint.transform;
         prefab.transform.position = _spawnPoint.transform.position;
 
         _sword = prefab.GetComponent<Sword>();
@@ -30,6 +31,13 @@ public class SwordsRotator : MonoBehaviour
     private void Update()
     {
         if (_sword != null)
-            _sword.transform.RotateAround(transform.position, Vector3.up, _attackSpeed * Time.deltaTime);
+        {
+            RotateObject(_spawnPoint.transform);
+        }
+    }
+
+    private void RotateObject(Transform obj)
+    {
+        obj.RotateAround(transform.position, Vector3.up, _data.AttackSpeed * Time.deltaTime);
     }
 }
