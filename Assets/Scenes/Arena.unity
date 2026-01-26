@@ -398,6 +398,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &743049926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 743049928}
+  - component: {fileID: 743049927}
+  m_Layer: 0
+  m_Name: LocalService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &743049927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743049926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafe264a1548660408a0fdb668fd4dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &743049928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743049926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1450698273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &790226166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -588,6 +632,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8763067823952735892, guid: 1aac326b83660f2438d33ca5acbd64b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 790226170}
+    - targetCorrespondingSourceObject: {fileID: 8763067823952735892, guid: 1aac326b83660f2438d33ca5acbd64b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 790226174}
+    - targetCorrespondingSourceObject: {fileID: 8763067823952735892, guid: 1aac326b83660f2438d33ca5acbd64b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 790226178}
   m_SourcePrefab: {fileID: 100100000, guid: 1aac326b83660f2438d33ca5acbd64b7, type: 3}
 --- !u!1 &790226167 stripped
 GameObject:
@@ -606,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a67e1ed94e69b34bba421e9a206f990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 1000
 --- !u!136 &790226170
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -626,10 +676,46 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.66
+  m_Radius: 2.5
   m_Height: 18
   m_Direction: 1
   m_Center: {x: 0, y: 9, z: 0}
+--- !u!114 &790226174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790226167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeba2ceeab51cb439fc37db23172b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravity: {fileID: 790226178}
+  _jumpPower: 1.5
+  _punchDistance: 5
+  _duration: 0.3
+  _shakeStrength: 15
+  _shakeVibrate: 10
+--- !u!114 &790226178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790226167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643c1bb740efe464d8b507aead00206d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _rayDistance: 5
+  _rayOffset: 1.5
+  _sphereRadius: 0.3
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +881,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: terrain-world-plain
       objectReference: {fileID: 0}
+    - target: {fileID: 1276682521725222, guid: f6cda126f120f430f91234c74e2cf2d0, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4643561411689734, guid: f6cda126f120f430f91234c74e2cf2d0, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -910,6 +1000,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 569737669}
+  - {fileID: 743049927}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -941,6 +1032,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 569737670}
+  - {fileID: 743049928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630895452

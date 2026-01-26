@@ -1,4 +1,8 @@
-﻿public interface IDamagable
+﻿using System;
+
+public interface IDamagable
 {
-    void TakeDamage(int damage);
+    event Action<float> DamageApllied;
+
+    void TakeDamage(float damage);
 }
