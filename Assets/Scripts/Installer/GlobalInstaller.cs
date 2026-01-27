@@ -25,5 +25,6 @@ public class GlobalInstaller : MonoInstaller
     private void BindFactory()
     {
         Container.BindInterfacesTo<Factory>().AsSingle();
+        Container.BindInterfacesTo<ParticleFactory>().AsSingle();
     }
 }

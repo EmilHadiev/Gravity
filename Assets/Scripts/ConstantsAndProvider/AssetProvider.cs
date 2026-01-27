@@ -8,4 +8,9 @@ public static class AssetProvider
         SwordIron
     }
     #endregion
+
+    #region Particles
+    public const string ParticleDamageImpact = nameof(ParticleDamageImpact);
+    public const string PartcleDamageText = nameof(PartcleDamageText);
+    #endregion
 }
