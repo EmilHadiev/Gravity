@@ -13,4 +13,11 @@ public static class AssetProvider
     public const string ParticleDamageImpact = nameof(ParticleDamageImpact);
     public const string PartcleDamageText = nameof(PartcleDamageText);
     #endregion
+
+    #region Enemies
+    public enum Enemies
+    {
+        HuggyWuggy
+    }
+    #endregion
 }

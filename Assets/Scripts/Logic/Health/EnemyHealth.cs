@@ -3,18 +3,34 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float _health;
+    private EnemyData _enemyData;
+
+    private float _currentHealth;
+    private float _maxHealth;
 
     public event Action<float, float> HealthChanged;
     public event Action<float> DamageApllied;
+
+    private void Awake()
+    {
+        IEnemy enemy = GetComponent<Enemy>();
+        _enemyData = enemy.Data;
+
+        _currentHealth = _enemyData.Health;
+        _maxHealth = _enemyData.Health;
+    }
 
     public void AddHealth(float healthPoints)
     {
         if (healthPoints <= 0)
             return;
 
-        _health += healthPoints;
-        HealthChanged?.Invoke(_health, 0);
+        _currentHealth += healthPoints;
+
+        if (_currentHealth > _maxHealth)
+            _currentHealth = _maxHealth;
+
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     public void TakeDamage(float damage)
@@ -22,12 +38,12 @@ public class EnemyHealth : MonoBehaviour, IHealth
         if (damage <= 0)
             return;
 
-        _health -= damage;
+        _currentHealth -= damage;
 
-        HealthChanged?.Invoke(_health, 0);
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
         DamageApllied?.Invoke(damage);
 
-        if (_health <= 0)
+        if (_currentHealth <= 0)
             gameObject.SetActive(false);
     }
 }

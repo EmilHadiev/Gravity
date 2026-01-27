@@ -42,7 +42,6 @@ public class DamageImpactViewer
     private void SetPosition(ParticleView view, Transform particlePlace)
     {
         view.transform.parent = particlePlace;
-        view.transform.position = particlePlace.position;
-        view.transform.rotation = particlePlace.rotation;
+        view.transform.SetPositionAndRotation(particlePlace.position, particlePlace.rotation);
     }
 }
