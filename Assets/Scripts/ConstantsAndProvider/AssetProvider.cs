@@ -20,4 +20,6 @@ public static class AssetProvider
         HuggyWuggy
     }
     #endregion
+
+    public const string MobileCanvas = nameof(MobileCanvas);
 }

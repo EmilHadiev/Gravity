@@ -1,7 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerMover : MonoBehaviour, IMovable
 {
+    [Inject] private readonly IFactory _factory;
+
     private IMovePattern _movePattern;
     private IPlayerAnimator _animator;
     private PlayerData _playerData;
@@ -18,7 +21,8 @@ public class PlayerMover : MonoBehaviour, IMovable
         _playerData = player.Data;
         _animator = player.Animator;
 
-        _movePattern = new PlayerMovePattern(this, _animator);
+        //_movePattern = new DesktopMovePattern(this, _animator);
+        _movePattern = new MobileMovePattern(this, _animator, _factory);
     }
 
     private void OnEnable()

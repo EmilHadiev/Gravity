@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovePattern : IMovePattern
+public abstract class PlayerMovePattern : IMovePattern
 {
     private readonly IMovable _player;
     private readonly IPlayerAnimator _animator;
@@ -21,8 +21,8 @@ public class PlayerMovePattern : IMovePattern
         if (_isWorking == false)
             return;
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = GetHorizontal();
+        float vertical = GetVertical();
 
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
@@ -37,6 +37,9 @@ public class PlayerMovePattern : IMovePattern
             TryPerformAnimation(false);
         }
     }
+
+    protected abstract float GetVertical();
+    protected abstract float GetHorizontal();
 
     private void Move(Vector3 direction)
     {
