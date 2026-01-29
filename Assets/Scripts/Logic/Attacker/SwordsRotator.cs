@@ -6,7 +6,7 @@ using Zenject;
 public class SwordsRotator : MonoBehaviour
 {
     [SerializeField] private SwordSpawnPoint _spawnPoint;
-    [SerializeField] private float _radius = 2.5f;
+    [SerializeField] private float _radius = 4f;
     [SerializeField] private float _yPosition = 3f;
 
     [Inject] private readonly IFactory _factory;

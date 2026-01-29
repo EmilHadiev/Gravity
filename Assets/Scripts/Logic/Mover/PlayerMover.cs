@@ -4,6 +4,7 @@ using Zenject;
 public class PlayerMover : MonoBehaviour, IMovable
 {
     [Inject] private readonly IFactory _factory;
+    [Inject] private readonly EnvData _envData;
 
     private IMovePattern _movePattern;
     private IPlayerAnimator _animator;
@@ -21,8 +22,10 @@ public class PlayerMover : MonoBehaviour, IMovable
         _playerData = player.Data;
         _animator = player.Animator;
 
-        //_movePattern = new DesktopMovePattern(this, _animator);
-        _movePattern = new MobileMovePattern(this, _animator, _factory);
+        if (_envData.IsDesktop)
+            _movePattern = new DesktopMovePattern(this, _animator);
+        else
+            _movePattern = new MobileMovePattern(this, _animator, _factory);
     }
 
     private void OnEnable()

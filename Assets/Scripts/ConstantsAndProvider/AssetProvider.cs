@@ -1,6 +1,10 @@
 public static class AssetProvider
 {
-    public const string Player = nameof(Player);
+    public enum Player
+    {
+        Player,
+        PlayerObby
+    };
 
     #region Swords
     public enum Swords
@@ -10,8 +14,11 @@ public static class AssetProvider
     #endregion
 
     #region Particles
-    public const string ParticleDamageImpact = nameof(ParticleDamageImpact);
-    public const string PartcleDamageText = nameof(PartcleDamageText);
+    public enum Particles
+    {
+        ParticleDamageImpact,
+        PartcleDamageText
+    }
     #endregion
 
     #region Enemies

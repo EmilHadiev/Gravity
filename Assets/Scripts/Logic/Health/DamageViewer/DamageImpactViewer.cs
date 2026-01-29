@@ -30,11 +30,11 @@ public class DamageImpactViewer
 
     private async UniTaskVoid CreateParticles()
     {
-        _damageImpact = await _particleFactory.CreateParticle(AssetProvider.ParticleDamageImpact);
+        _damageImpact = await _particleFactory.CreateParticle(AssetProvider.Particles.ParticleDamageImpact.ToString());
         _damageImpact.Stop();
         SetPosition(_damageImpact, _damageImpactPlace);
 
-        _damageValue = await _particleFactory.CreateParticleText(AssetProvider.PartcleDamageText);
+        _damageValue = await _particleFactory.CreateParticleText(AssetProvider.Particles.PartcleDamageText.ToString());
         _damageValue.Stop();
         SetPosition(_damageValue, _damageValuePlace);
     }

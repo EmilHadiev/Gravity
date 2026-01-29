@@ -5,6 +5,7 @@ using Zenject;
 public class PlayerSpawner : MonoBehaviour
 {
     [Inject] private readonly IFactory _factory;
+    [SerializeField] private AssetProvider.Player _player;
 
     public void Spawn(ICameraFollower cameraFollower)
     {
@@ -13,7 +14,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private async UniTask CreatePlayer(ICameraFollower cameraFollower)
     {
-        var prefab = await _factory.CreateAsync(AssetProvider.Player);
+        var prefab = await _factory.CreateAsync(_player.ToString());
         prefab.transform.position = transform.position;
         prefab.transform.rotation = transform.rotation;
 
