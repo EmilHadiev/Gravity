@@ -1,15 +1,14 @@
-using UnityEngine;
 using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        BindCameraFollower();
+        BindPlayerFinder();
     }
 
-    private void BindCameraFollower()
+    private void BindPlayerFinder()
     {
-        
+        Container.BindInterfacesTo<PlayerFinder>().AsSingle();
     }
 }

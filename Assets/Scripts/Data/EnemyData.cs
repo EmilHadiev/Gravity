@@ -4,8 +4,10 @@
 public class EnemyData : ScriptableObject
 {
     [Header("Stats")]
-    public float Health;
-    public float Damage;
+    public float Health = 100;
+    public float Damage = 10;
+    public float MoveSpeed = 5;
+    public float RotateSpeed = 0;
 
     [Header("Damage view")]
     public float JumpPower = 1.5f;
