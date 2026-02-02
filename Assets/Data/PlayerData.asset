@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MoveSpeed>k__BackingField: 10
   <RotateSpeed>k__BackingField: 15
-  <AttackSpeed>k__BackingField: 100
+  <AttackSpeed>k__BackingField: 200
   <Damage>k__BackingField: 10
+  <Health>k__BackingField: 100
   <SwordsCount>k__BackingField: 6
-  <Swords>k__BackingField: 0
+  <Swords>k__BackingField: 8
+  <Player>k__BackingField: 0

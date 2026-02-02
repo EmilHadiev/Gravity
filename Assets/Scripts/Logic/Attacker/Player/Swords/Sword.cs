@@ -2,6 +2,7 @@
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class Sword : MonoBehaviour
 {
     [SerializeField] private TriggerObserver _observer;

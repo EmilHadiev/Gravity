@@ -7,7 +7,9 @@ public class EnemyData : ScriptableObject
     public float Health = 100;
     public float Damage = 10;
     public float MoveSpeed = 5;
-    public float RotateSpeed = 0;
+    public float AttackRadius = 3;
+    public float AttackDistance;
+    public int CountTargets = 1;
 
     [Header("Damage view")]
     public float JumpPower = 1.5f;

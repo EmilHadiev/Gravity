@@ -4,6 +4,9 @@ using Zenject;
 [RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerAttacker))]
+[RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerAnimator _animator;

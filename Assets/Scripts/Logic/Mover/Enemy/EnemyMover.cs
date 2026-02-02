@@ -1,7 +1,6 @@
 using UnityEngine;
-using Zenject;
 
-public class EnemyMover : MonoBehaviour, IMovable
+public class EnemyMover : MonoBehaviour, IEnemyMovable
 {
     private IEnemyAnimator _animator;
     private EnemyData _data;
@@ -16,17 +15,27 @@ public class EnemyMover : MonoBehaviour, IMovable
         Player player = GameObject.FindObjectOfType<Player>();
 
         _movePattern = new EnemyMovePattern(this, player.transform, _animator);
-        _movePattern.Start();
+        enemy.StateMachine.SwitchState<EnemyRunState>();
     }
 
     public Transform Transform => transform;
 
     public float MoveSpeed => _data.MoveSpeed;
 
-    public float RotateSpeed => _data.RotateSpeed;
+    public float RotateSpeed => default;
 
     private void Update()
     {
         _movePattern.Update();
+    }
+
+    public void StartMove()
+    {
+        _movePattern.Start();
+    }
+
+    public void StopMove()
+    {
+        _movePattern.Stop();
     }
 }

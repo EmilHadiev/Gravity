@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: enemy_HuggyWuggy
   m_EditorClassIdentifier: 
   Health: 1000
-  Damage: 0
+  Damage: 10
   MoveSpeed: 7
-  RotateSpeed: 0
+  AttackRadius: 5
+  AttackDistance: 2
+  CountTargets: 1
   JumpPower: 1.5
   PunchDistance: 2
   Duration: 0.3
