@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,12 @@ public class GlobalInstaller : MonoInstaller
         BindAddresables();
         BindPlayerData();
         BindEnvData();
+        BindAdv();
+    }
+
+    private void BindAdv()
+    {
+        Container.BindInterfacesTo<AdvService>().AsSingle();
     }
 
     private void BindEnvData()

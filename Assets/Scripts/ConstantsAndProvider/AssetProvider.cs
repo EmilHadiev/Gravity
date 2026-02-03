@@ -9,15 +9,16 @@ public static class AssetProvider
     #region Swords
     public enum Swords
     {
+        SwordWood,
         SwordIron,
-        SwordDiamond,
         SwordGold,
+        SwordDiamond,
         SwordNether,
+
         BatSword,
         DarkPumpkinSword,
         HammerSword,
-        SwordLinked,
-        SwordWood
+        LinkedSword        
     }
     #endregion
 
