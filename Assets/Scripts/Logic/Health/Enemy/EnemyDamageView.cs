@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CustomGravity))]
-public class EnemyDamageView : MonoBehaviour
+public class EnemyDamageView : MonoBehaviour, IKnockable
 {
     [SerializeField] private ParticlePlace _impactPlace;
     [SerializeField] private ParticlePlace _damageValuePlace;
@@ -35,9 +35,13 @@ public class EnemyDamageView : MonoBehaviour
         _particleFactory = particleFactory;
     }
 
+    public void ApplyKnockBack(float punchDistance)
+    {
+        _knockbacker.ApplyKnockback(punchDistance);
+    }
+
     private void OnDamageAppllied(float damage)
     {
-        _knockbacker.ApplyKnockback();
         _impactViewer.Play(damage);
     }
 

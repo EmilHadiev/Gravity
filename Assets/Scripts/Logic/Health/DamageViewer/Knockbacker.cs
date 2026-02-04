@@ -17,7 +17,7 @@ public class Knockbacker
         _data = data;
     }
 
-    public void ApplyKnockback()
+    public void ApplyKnockback(float punchDistance)
     {
         _activeMoveTween?.Kill();
         _activeShakeTween?.Kill();
@@ -25,7 +25,7 @@ public class Knockbacker
         _transform.localRotation = Quaternion.identity;
 
         // Рассчитываем вектор отлета
-        Vector3 knockbackDir = -_transform.forward * _data.PunchDistance;
+        Vector3 knockbackDir = -_transform.forward * punchDistance;
         Vector3 targetPos = _transform.position + knockbackDir;
 
         // Получаем безопасную точку на земле через сферу

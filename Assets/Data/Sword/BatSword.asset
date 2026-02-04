@@ -15,4 +15,4 @@ MonoBehaviour:
   <Sword>k__BackingField: 5
   <IsPurchase>k__BackingField: 1
   Damage: 10
-  PunchDistance: 2
+  PunchDistance: 10
