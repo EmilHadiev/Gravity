@@ -228,6 +228,12 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "file:C:/Users/emilh/OneDrive/Рабочий стол/unity ассеты/UnityAssets/com.unity.nuget.newtonsoft-json-3.2.2.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.performance.profile-analyzer": {
       "version": "1.2.3",
       "depth": 1,

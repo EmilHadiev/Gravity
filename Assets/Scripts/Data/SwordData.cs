@@ -7,5 +7,6 @@ public class SwordData : ScriptableObject, IPurchasable
     [field: SerializeField] public bool IsPurchase { get; set; }
 
     public float Damage;
-    public float PunchDistance = 2f;
+    public float PushDistance = 2f;
+    public int Price = 0;
 }

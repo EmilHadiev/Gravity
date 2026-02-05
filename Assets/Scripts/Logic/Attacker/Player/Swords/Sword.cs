@@ -40,6 +40,6 @@ public class Sword : MonoBehaviour
             damagable.TakeDamage(_data.Damage);
 
         if (collider.TryGetComponent(out IKnockable knockable))
-            knockable.ApplyKnockBack(_data.PunchDistance);
+            knockable.ApplyKnockBack(_data.PushDistance);
     }
 }

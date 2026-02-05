@@ -6,12 +6,15 @@ public class SwordSwitcher : MonoBehaviour
 {
     [SerializeField] private TriggerObserver _observer;
     [SerializeField] private SwitcherView _view;
-    [SerializeField] private AssetProvider.Swords _newSword;
+    [SerializeField] private SwordInfoView _swordInfoView;
+
+    private AssetProvider.Swords _newSword;
 
     private void OnValidate()
     {
         _observer ??= GetComponent<TriggerObserver>();
         _view ??= GetComponent<SwitcherView>();
+        _swordInfoView ??= GetComponentInChildren<SwordInfoView>();
     }
 
     private void OnEnable()
@@ -24,9 +27,13 @@ public class SwordSwitcher : MonoBehaviour
         _observer.Entered -= OnPlayerEntered;
     }
 
-    private void Start()
+    public void ShowSwordInfo(SwordData swordData)
     {
+        _swordInfoView.SetData(swordData);
+
+        _newSword = swordData.Sword;
         _view.CreateSwordView(_newSword);
+        
     }
 
     private void OnPlayerEntered(Collider collider)

@@ -5,6 +5,7 @@ using Zenject;
 public class SwitcherView : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotation;
+    [SerializeField] private Transform _spawnPosition;
 
     [Inject] private readonly IFactory _factory;
 
@@ -20,11 +21,12 @@ public class SwitcherView : MonoBehaviour
         DisableComponents(prefab);
     }
 
-    private void SetPosition(Transform view)
+    private void SetPosition(Transform prefab)
     {
-        view.transform.parent = transform;
+        prefab.transform.parent = transform;
         var rotation = Quaternion.Euler(_rotation);
-        view.transform.SetPositionAndRotation(transform.position, rotation);
+        prefab.transform.SetPositionAndRotation(transform.position, rotation);
+        prefab.transform.position = _spawnPosition.position;
     }
 
     private void DisableComponents(GameObject obj)
