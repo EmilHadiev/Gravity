@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
@@ -7,6 +8,8 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] private TriggerObserver _observer;
     [SerializeField] private Rigidbody _rigidbody;
+
+    [Inject] private readonly IPlayerSoundContainer _playerSound;
 
     private SwordData _data;
 
@@ -37,7 +40,10 @@ public class Sword : MonoBehaviour
     private void OnEnemyEntered(Collider collider)
     {
         if (collider.TryGetComponent(out IDamagable damagable))
+        {
             damagable.TakeDamage(_data.Damage);
+            _playerSound.Play(AssetProvider.Sounds.Attack.ToString());
+        }
 
         if (collider.TryGetComponent(out IKnockable knockable))
             knockable.ApplyKnockBack(_data.PushDistance);

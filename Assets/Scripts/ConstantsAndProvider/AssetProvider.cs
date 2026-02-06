@@ -37,5 +37,13 @@ public static class AssetProvider
     }
     #endregion
 
+    #region Sound
+    public enum Sounds
+    {
+        Death,
+        Attack
+    }
+    #endregion
+
     public const string MobileCanvas = nameof(MobileCanvas);
 }
