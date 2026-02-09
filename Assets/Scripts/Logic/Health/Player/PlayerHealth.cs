@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
@@ -7,8 +8,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private float _maxHealth;
     private float _currentHealth;
 
+    [Inject] private readonly IPlayerSoundContainer _playerSound;
+
     public event Action<float, float> HealthChanged;
     public event Action<float> DamageApllied;
+    public event Action Die;
 
     private void Awake()
     {
@@ -16,6 +20,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
         _data = player.Data;
         _maxHealth = _data.Health;
         _currentHealth = _data.Health;
+    }
+
+    private void Start()
+    {
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     public void AddHealth(float healthPoints)
@@ -33,17 +42,16 @@ public class PlayerHealth : MonoBehaviour, IHealth
         _currentHealth -= damage;
 
         if (_currentHealth <= 0)
-            Die();
-
-        HealthChanged?.Invoke(_currentHealth, _maxHealth);
-        DamageApllied?.Invoke(damage);
+        {
+            Die?.Invoke();
+        }
+        else
+        {
+            HealthChanged?.Invoke(_currentHealth, _maxHealth);
+            DamageApllied?.Invoke(damage);
+            _playerSound.Play(AssetProvider.Sounds.PlayerTakeDamage.ToString());
+        } 
 
         Debug.Log(_currentHealth);
-    }
-
-    private void Die()
-    {
-        Debug.Log("Игрок все...");
-        gameObject.SetActive(false);
     }
 }

@@ -6,6 +6,7 @@
 [RequireComponent(typeof(EnemyAnimator))]
 [RequireComponent(typeof(EnemyMover))]
 [RequireComponent(typeof(EnemyAttacker))]
+[RequireComponent(typeof(EnemyDieLogic))]
 public class Enemy : MonoBehaviour, IEnemy
 {
     [SerializeField] private EnemyData _data;

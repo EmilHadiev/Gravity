@@ -7,6 +7,7 @@ public interface IHealth : IDamagable
     /// second - max health
     /// </summary>
     event Action<float, float> HealthChanged;
+    event Action Die;
 
     void AddHealth(float healthPoints);
 }

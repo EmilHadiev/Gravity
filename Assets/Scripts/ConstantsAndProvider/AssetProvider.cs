@@ -41,7 +41,8 @@ public static class AssetProvider
     public enum Sounds
     {
         Death,
-        Attack
+        Attack,
+        PlayerTakeDamage
     }
     #endregion
 

@@ -18,6 +18,12 @@ public class GlobalInstaller : MonoInstaller
         BindAdv();
         BindSwordData();
         BindSound();
+        BindGameOverService();
+    }
+
+    private void BindGameOverService()
+    {
+        Container.BindInterfacesTo<GameOverService>().AsSingle();
     }
 
     private void BindSound()
