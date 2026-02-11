@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Sword>k__BackingField: 8
   <IsPurchase>k__BackingField: 1
+  <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   Damage: 10
-  PunchDistance: 2
+  PushDistance: 2
+  Price: 0

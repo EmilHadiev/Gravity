@@ -4,10 +4,12 @@ using Zenject;
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(SwordTrial))]
 public class Sword : MonoBehaviour
 {
     [SerializeField] private TriggerObserver _observer;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private SwordTrial _swordTrial;
 
     [Inject] private readonly IPlayerSoundContainer _playerSound;
 
@@ -17,6 +19,7 @@ public class Sword : MonoBehaviour
     {
         _observer ??= GetComponent<TriggerObserver>();
         _rigidbody ??= GetComponent<Rigidbody>();
+        _swordTrial ??= GetComponent<SwordTrial>();
 
         if (_rigidbody.isKinematic == false)
             _rigidbody.isKinematic = true;
@@ -35,6 +38,7 @@ public class Sword : MonoBehaviour
     public void SetData(SwordData swordData)
     {
         _data = swordData;
+        _swordTrial.SetColor(swordData.Color);
     }
 
     private void OnEnemyEntered(Collider collider)
