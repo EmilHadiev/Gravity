@@ -46,7 +46,7 @@ public class Sword : MonoBehaviour
         if (collider.TryGetComponent(out IDamagable damagable))
         {
             damagable.TakeDamage(_data.Damage);
-            _playerSound.Play(AssetProvider.Sounds.Attack.ToString());
+            _playerSound.PlayWhenFree(AssetProvider.Sounds.Attack.ToString());
         }
 
         if (collider.TryGetComponent(out IKnockable knockable))

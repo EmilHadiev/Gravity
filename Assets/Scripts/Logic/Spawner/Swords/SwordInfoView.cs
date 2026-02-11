@@ -10,7 +10,7 @@ public class SwordInfoView : MonoBehaviour
     public void SetData(SwordData swordData)
     {
         _damageText.text = swordData.Damage.ToString();
-        _pushText.text = swordData.PushDistance.ToString();
+        _pushText.text = swordData.PushDistance.ToString()+"%";
         _priceText.text = $"{swordData.Price}$";
     }
 }

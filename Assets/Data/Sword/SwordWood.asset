@@ -15,6 +15,6 @@ MonoBehaviour:
   <Sword>k__BackingField: 0
   <IsPurchase>k__BackingField: 1
   <Color>k__BackingField: {r: 0.41960788, g: 0.3372549, b: 0.1254902, a: 1}
-  Damage: 10
-  PushDistance: 2
+  Damage: 5
+  PushDistance: 1
   Price: 0
