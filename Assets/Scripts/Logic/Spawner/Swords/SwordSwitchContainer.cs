@@ -22,12 +22,13 @@ public class SwordSwitchContainer : MonoBehaviour
     {
         for (int i = 0; i < _swordData.Length; i++)
         {
-            await UniTask.DelayFrame(10);
             var prefab = _factory.Create(_template.gameObject);            
             SetPosition(prefab.transform, i);
             var swordView = prefab.GetComponent<SwordSwitcher>();
             swordView.ShowSwordInfo(_swordData[i]);
             _switchs.Add(swordView);
+
+            await UniTask.DelayFrame(10);
         }
     }
 

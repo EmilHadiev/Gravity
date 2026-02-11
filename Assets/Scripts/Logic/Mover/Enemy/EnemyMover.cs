@@ -6,27 +6,24 @@ public class EnemyMover : MonoBehaviour, IEnemyMovable
     private EnemyData _data;
     private IMovePattern _movePattern;
 
+    public Transform Transform => transform;
+    public float MoveSpeed => _data.MoveSpeed;
+    public float RotateSpeed => default;
+
     private void Start()
     {
         IEnemy enemy = GetComponent<Enemy>();
         _animator = enemy.Animator;
         _data = enemy.Data;
 
-        Player player = GameObject.FindObjectOfType<Player>();
-
-        _movePattern = new EnemyMovePattern(this, player.transform, _animator);
+        var player = GameObject.FindAnyObjectByType<Player>().Mover;
+        _movePattern = new EnemyMovePattern(this, player.Transform, _animator);
         enemy.StateMachine.SwitchState<EnemyRunState>();
     }
 
-    public Transform Transform => transform;
-
-    public float MoveSpeed => _data.MoveSpeed;
-
-    public float RotateSpeed => default;
-
     private void Update()
     {
-        _movePattern.Update();
+        _movePattern?.Update();
     }
 
     public void StartMove()

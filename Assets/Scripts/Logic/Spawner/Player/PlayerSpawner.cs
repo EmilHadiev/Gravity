@@ -1,24 +1,34 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using Zenject;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [Inject] private readonly IFactory _factory;
-    [Inject] private readonly PlayerData _data;
+    public event Action PlayerSpawned;
 
-    public void Spawn(ICameraFollower cameraFollower, IPlayerFinder playerFinder)
+    private IFactory _factory;
+    private PlayerData _data;
+
+    [Inject]
+    private void Constructor(IFactory factory, PlayerData playerData)
     {
-        CreatePlayer(cameraFollower, playerFinder).Forget();
+        _factory = factory;
+        _data = playerData;
     }
 
-    private async UniTask CreatePlayer(ICameraFollower cameraFollower, IPlayerFinder playerFinder)
+    public void Spawn(ICameraFollower cameraFollower)
+    {
+       CreatePlayer(cameraFollower).Forget();
+    }
+
+    private async UniTaskVoid CreatePlayer(ICameraFollower cameraFollower)
     {
         var prefab = await _factory.CreateAsync(_data.Player.ToString());
         prefab.transform.position = transform.position;
         prefab.transform.rotation = transform.rotation;
 
         cameraFollower.SetTarget(prefab.transform);
-        playerFinder.SetPlayer(prefab.GetComponent<IPlayer>());
+        PlayerSpawned?.Invoke();
     }
 }

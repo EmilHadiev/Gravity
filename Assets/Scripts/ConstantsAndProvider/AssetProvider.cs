@@ -46,5 +46,13 @@ public static class AssetProvider
     }
     #endregion
 
+    #region Scenes
+    public enum Scenes
+    {
+        Arena
+    }
+
+    #endregion
+
     public const string MobileCanvas = nameof(MobileCanvas);
 }

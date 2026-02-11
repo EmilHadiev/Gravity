@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -11,7 +12,6 @@ public class GlobalInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindFactory();
         BindAddresables();
         BindPlayerData();
         BindEnvData();
@@ -19,6 +19,12 @@ public class GlobalInstaller : MonoInstaller
         BindSwordData();
         BindSound();
         BindGameOverService();
+        BindSceneLoader();
+    }
+
+    private void BindSceneLoader()
+    {
+        Container.BindInterfacesTo<AddressablesSceneLoader>().AsSingle();
     }
 
     private void BindGameOverService()
@@ -64,9 +70,5 @@ public class GlobalInstaller : MonoInstaller
         Container.BindInterfacesTo<AddressablesLoader>().AsSingle();
     }
 
-    private void BindFactory()
-    {
-        Container.BindInterfacesTo<Factory>().AsSingle();
-        Container.BindInterfacesTo<ParticleFactory>().AsSingle();
-    }
+    
 }

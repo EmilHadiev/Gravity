@@ -20,9 +20,6 @@ public abstract class SoundContainer : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(_sounds == null);
-        Debug.Log(_clips == null);
-
         foreach (var sound in _sounds)
             _clips.Add(sound.Name, sound.Clip);
     }
