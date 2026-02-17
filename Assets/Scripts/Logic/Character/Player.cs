@@ -6,6 +6,7 @@ using Zenject;
 [RequireComponent(typeof(PlayerAttacker))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(PlayerDieLogic))]
+[RequireComponent(typeof(PlayerJumper))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IPlayer

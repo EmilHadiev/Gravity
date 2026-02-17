@@ -73,7 +73,6 @@ public class SwordCreator
             prefab.transform.localRotation = Quaternion.identity;
 
             _currentSword = prefab.GetComponent<Sword>();
-            _currentSword.SetData(GetSwordData(_playerData.Swords));
         }
 
         _currentSwordName = GetCurrentSwordName();

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +10,7 @@ public class ArenaBootsTrap : MonoBehaviour
     private void OnEnable()
     {
         _playerSpawner.PlayerSpawned += OnPlayerSpawned;
+        
     }
 
     private void OnDisable()

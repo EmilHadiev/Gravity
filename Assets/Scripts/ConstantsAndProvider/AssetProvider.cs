@@ -26,7 +26,8 @@ public static class AssetProvider
     public enum Particles
     {
         ParticleDamageImpact,
-        PartcleDamageText
+        PartcleDamageText,
+        GroundHit
     }
     #endregion
 
@@ -42,7 +43,9 @@ public static class AssetProvider
     {
         Death,
         Attack,
-        PlayerTakeDamage
+        PlayerTakeDamage,
+        Jump,
+        AttackMiss
     }
     #endregion
 

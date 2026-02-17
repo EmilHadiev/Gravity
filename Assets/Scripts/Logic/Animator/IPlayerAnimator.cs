@@ -3,8 +3,7 @@
     void StartRunning();
     void StopRunning();
 
-    void StartAttacking();
-    void StopAttacking();
+    void Attack();
 
     void Jump();
 }

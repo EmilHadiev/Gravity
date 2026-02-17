@@ -15,8 +15,10 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 10
   <RotateSpeed>k__BackingField: 15
   <AttackSpeed>k__BackingField: 200
-  <Damage>k__BackingField: 10
   <Health>k__BackingField: 100
   <SwordsCount>k__BackingField: 6
+  <MaxAttackTargets>k__BackingField: 10
+  <AttackRange>k__BackingField: 2
+  <AttackRadius>k__BackingField: 7
   <Swords>k__BackingField: 3
   <Player>k__BackingField: 1

@@ -1,12 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
-
-public class MobileMovePattern : PlayerMovePattern
+﻿public class MobileMovePattern : PlayerMovePattern
 {
     private Joystick _joystick;
 
-    public MobileMovePattern(IMovable movable, IPlayerAnimator animator, IFactory factory) : base(movable, animator)
+    public MobileMovePattern(IMovable movable, IPlayerAnimator animator, IMobileInput mobileInput) : base(movable, animator)
     {
-        CreateMobileInput(factory).Forget();
+        _joystick = mobileInput.Joystick;
     }
 
     protected override float GetHorizontal()
@@ -23,11 +21,5 @@ public class MobileMovePattern : PlayerMovePattern
             return _joystick.Vertical;
 
         return 0;
-    }
-
-    private async UniTaskVoid CreateMobileInput(IFactory factory)
-    {
-        var prefab = await factory.CreateAsync(AssetProvider.MobileCanvas);
-        _joystick = prefab.GetComponent<MobileCanvas>().Joystick;
     }
 }
