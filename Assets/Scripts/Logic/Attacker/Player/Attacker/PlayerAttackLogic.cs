@@ -6,12 +6,15 @@ public class PlayerAttackLogic
 {
     private readonly IFactory _factory;
     private readonly IPlayerSoundContainer _playerSound;
-    private readonly PlayerData _playerData;
-    private readonly SwordData _swordData;
+    private readonly PlayerData _playerData;   
     private readonly Collider[] _hits;
+    private readonly SwordData[] _swordsData;
     private readonly Transform _player;
     private readonly LayerMask _enemyMask;
     private readonly SwordSpawnPoint _swordPlace;
+
+    private Sword _currentSword;
+    private SwordData _swordData;
 
     public PlayerAttackLogic(Transform player, SwordSpawnPoint swordSpawn, IFactory factory, IPlayerSoundContainer playerSoundContainer, 
         PlayerData playerData, SwordData[] swords)
@@ -19,8 +22,9 @@ public class PlayerAttackLogic
         _factory = factory;
         _swordPlace = swordSpawn;
         _playerSound = playerSoundContainer;
+        _swordsData = swords;
         _playerData = playerData;
-        _swordData = GetSwordData(swords);
+        _swordData = GetSwordData();
         _enemyMask = LayerMask.GetMask(CustmomMasks.Enemy);
         _player = player;
 
@@ -36,6 +40,8 @@ public class PlayerAttackLogic
 
         PhysicsDebug.DrawDebug(GetAttackPosition(), _playerData.AttackRadius, color: Color.blue);
 
+        _currentSword.TrialToggle(true);
+
         if (targets == 0)
         {
             _playerSound.Play(AssetProvider.Sounds.AttackMiss.ToString());
@@ -48,8 +54,20 @@ public class PlayerAttackLogic
             AttackTarget(_hits[i]);
     }
 
+    public void StopAttack()
+    {
+        _currentSword.TrialToggle(false);
+    }
+
     public void SwitchSword(AssetProvider.Swords newSword)
     {
+        _factory.ReleaseAsset(_playerData.Swords.ToString());
+        GameObject.Destroy(_currentSword.gameObject);
+
+        _playerData.Swords = newSword;
+        _swordData = GetSwordData();
+        CreateSword(newSword).ToString();
+
         Debug.Log("А новый меч: " + newSword);
     }
 
@@ -65,7 +83,7 @@ public class PlayerAttackLogic
 
     private void AttackTarget(Collider collider)
     {
-        Debug.Log(collider.name);
+
         if (collider == null)
             return;
 
@@ -78,11 +96,11 @@ public class PlayerAttackLogic
             knockable.ApplyKnockBack(_swordData.PushDistance);
     }
 
-    private SwordData GetSwordData(SwordData[] swords)
+    private SwordData GetSwordData()
     {
-        for (int i = 0; i < swords.Length; i++)
-            if (swords[i].Sword == _playerData.Swords)
-                return swords[i];
+        for (int i = 0; i < _swordsData.Length; i++)
+            if (_swordsData[i].Sword == _playerData.Swords)
+                return _swordsData[i];
 
         throw new ArgumentNullException();
     }
@@ -96,6 +114,11 @@ public class PlayerAttackLogic
     {
         var prefab = await _factory.CreateAsync(swordName.ToString());
         prefab.transform.parent = _swordPlace.transform;
+
+        _currentSword = prefab.GetComponent<Sword>();
+        _currentSword.SetColor(_swordData.Color);
+        StopAttack();
+
         var rotate = Quaternion.Euler(_swordPlace.SwordRotation);
         prefab.transform.SetLocalPositionAndRotation(_swordPlace.SwordPosition, rotate);
     }

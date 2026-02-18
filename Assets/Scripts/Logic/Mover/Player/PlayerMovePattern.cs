@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
-public abstract class PlayerMovePattern : IMovePattern
+public class PlayerMovePattern : IMovePattern
 {
     private readonly IMovable _player;
     private readonly IPlayerAnimator _animator;
+    private readonly IInput _input;
 
     private bool _isWorking;
 
-    public PlayerMovePattern(IMovable movable, IPlayerAnimator animator)
+    public PlayerMovePattern(IMovable movable, IPlayerAnimator animator, IInput input)
     {
         _player = movable;
         _animator = animator;
+        _input = input;
     }
 
     public void Start() => _isWorking = true;
@@ -38,8 +40,8 @@ public abstract class PlayerMovePattern : IMovePattern
         }
     }
 
-    protected abstract float GetVertical();
-    protected abstract float GetHorizontal();
+    private float GetVertical() => _input.GetVertical();
+    private float GetHorizontal() => _input.GetHorizontal();
 
     private void Move(Vector3 direction)
     {

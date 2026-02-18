@@ -19,7 +19,7 @@ public class PlayerJumper : MonoBehaviour
     private const string GroundMask = "Ground";
 
     [Inject] private readonly IPlayerSoundContainer _playerSound;
-    [Inject] private readonly IMobileInput _input;
+    [Inject] private readonly IInput _input;
 
     private LayerMask _groundMask;
 
@@ -51,14 +51,6 @@ public class PlayerJumper : MonoBehaviour
     private void OnDisable()
     {
         _input.Jumped -= TryJump;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryJump();
-        }
     }
 
     private void FixedUpdate()

@@ -5,7 +5,7 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
 {
     [SerializeField] private SwordSpawnPoint _swordPlace;
 
-    [Inject] private readonly IMobileInput _input;
+    [Inject] private readonly IInput _mobileInput;
 
     private IFactory _factory;
     private IPlayerSoundContainer _playerSound;
@@ -14,7 +14,7 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
     private PlayerAttackLogic _attackLogic;
     private IPlayerAnimator _animator;
 
-    private const int LeftMouseButton = 0;
+    private bool _isCanAttacking = true;
 
     private void Awake()
     {
@@ -26,12 +26,12 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
 
     private void OnEnable()
     {
-        _input.Attacked += Attack;
+        _mobileInput.Attacked += Attack;
     }
 
     private void OnDisable()
     {
-        _input.Attacked -= Attack;
+        _mobileInput.Attacked -= Attack;
     }
 
     [Inject]
@@ -40,14 +40,6 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
         _factory = factory;
         _playerSound = playerSoundContainer;
         _swordsData = swords;
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(LeftMouseButton))
-        {
-            Attack();
-        }
     }
 
     private void Attack()
@@ -59,11 +51,13 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
     private void AttackStarted()
     {
         _attackLogic.Attack();
+        _isCanAttacking = false;
     }
 
     private void AttackEnded()
     {
-
+        _attackLogic.StopAttack();
+        Debug.Log("Стоп атаки!");
     }
 
     public void Switch(AssetProvider.Swords newSword)
