@@ -15,7 +15,7 @@ public static class AssetProvider
         SwordDiamond,
         SwordNether,
 
-        BatSword,
+        BraidSword,
         DarkPumpkinSword,
         HammerSword,
         LinkedSword        
@@ -34,7 +34,8 @@ public static class AssetProvider
     #region Enemies
     public enum Enemies
     {
-        HuggyWuggy
+        HuggyWuggy,
+        TungSahur
     }
     #endregion
 

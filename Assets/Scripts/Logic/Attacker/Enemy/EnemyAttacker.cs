@@ -13,21 +13,18 @@ public class EnemyAttacker : MonoBehaviour, IAttackable
         _observer ??= GetComponentInParent<TriggerObserver>();
     }
 
-    private void Awake()
+    private void Start()
     {
-        IEnemy enemy = GetComponentInParent<Enemy>();
+        IEnemy enemy = GetComponent<Enemy>();
         _animator = enemy.Animator;
         _stateMachine = enemy.StateMachine;
         _attackLogic = new EnemyAttackLogic(enemy.Data, transform);
-    }
 
-    private void OnEnable()
-    {
         _observer.Entered += OnPlayerEntered;
         _observer.Exited += OnPlayerExited;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _observer.Entered -= OnPlayerEntered;
         _observer.Exited -= OnPlayerExited;

@@ -13,9 +13,6 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
     private PlayerData _data;
     private PlayerAttackLogic _attackLogic;
     private IPlayerAnimator _animator;
-
-    private bool _isCanAttacking = true;
-
     private void Awake()
     {
         var player = GetComponent<IPlayer>();
@@ -51,13 +48,11 @@ public class PlayerAttacker : MonoBehaviour, ISwordSwitcher
     private void AttackStarted()
     {
         _attackLogic.Attack();
-        _isCanAttacking = false;
     }
 
     private void AttackEnded()
     {
         _attackLogic.StopAttack();
-        Debug.Log("Стоп атаки!");
     }
 
     public void Switch(AssetProvider.Swords newSword)
