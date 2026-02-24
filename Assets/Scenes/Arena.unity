@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb32a542d8f5c4a49a80dfa3d10407ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: 1
+  _enemy: 2
   _spawnPositions:
   - {fileID: 310810104}
   - {fileID: 308218008}

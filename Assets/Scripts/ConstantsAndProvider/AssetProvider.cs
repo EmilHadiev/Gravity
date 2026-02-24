@@ -35,7 +35,8 @@ public static class AssetProvider
     public enum Enemies
     {
         HuggyWuggy,
-        TungSahur
+        TungSahur,
+        CapuccinoAssasino
     }
     #endregion
 
