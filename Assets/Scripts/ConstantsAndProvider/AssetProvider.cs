@@ -36,7 +36,8 @@ public static class AssetProvider
     {
         HuggyWuggy,
         TungSahur,
-        CapuccinoAssasino
+        CappuccinoAssasino,
+        BallerinaCappuccino
     }
     #endregion
 
