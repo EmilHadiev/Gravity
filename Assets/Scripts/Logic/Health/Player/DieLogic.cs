@@ -10,12 +10,12 @@ public abstract class DieLogic : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Die += OnDie;
+        _health.Died += OnDie;
     }
 
     private void OnDisable()
     {
-        _health.Die -= OnDie;
+        _health.Died -= OnDie;
     }
 
     protected abstract void OnDie();

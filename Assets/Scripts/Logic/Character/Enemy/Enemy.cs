@@ -14,11 +14,14 @@ public class Enemy : MonoBehaviour, IEnemy
     [SerializeField] private EnemyAnimator _animator;
     [SerializeField] private EnemyMover _mover;
     [SerializeField] private EnemyAttacker _attacker;
+    [SerializeField] private EnemyHealth _health;
 
     public EnemyData Data => _data;
     public IEnemyAnimator Animator => _animator;
 
     public IEnemyStateMachine StateMachine { get; private set; }
+
+    public IHealth Health => _health;
 
     private void OnValidate()
     {
@@ -26,6 +29,7 @@ public class Enemy : MonoBehaviour, IEnemy
         _animator ??= GetComponent<EnemyAnimator>();
         _mover ??= GetComponent<EnemyMover>();
         _attacker ??= GetComponent<EnemyAttacker>();
+        _health ??= GetComponent<EnemyHealth>();
     }
 
     private void Awake()

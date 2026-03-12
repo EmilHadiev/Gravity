@@ -9,6 +9,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private EnvData _envData;
     [SerializeField] private SwordData[] _swords;
     [SerializeField] private PlayerSoundContainer _playerSound;
+    [SerializeField] private EnemySoundContainer _enemySound;
 
     public override void InstallBindings()
     {
@@ -35,6 +36,7 @@ public class GlobalInstaller : MonoInstaller
     private void BindSound()
     {
         Container.BindInterfacesTo<PlayerSoundContainer>().FromComponentInNewPrefab(_playerSound).AsSingle();
+        Container.BindInterfacesTo<EnemySoundContainer>().FromComponentInNewPrefab(_enemySound).AsSingle();
     }
 
     private void BindSwordData()

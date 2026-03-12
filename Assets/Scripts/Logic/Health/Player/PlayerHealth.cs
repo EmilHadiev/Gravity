@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public event Action<float, float> HealthChanged;
     public event Action<float> DamageApllied;
-    public event Action Die;
+    public event Action Died;
 
     private void Awake()
     {
@@ -42,8 +42,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         _currentHealth -= damage;
 
         if (_currentHealth <= 0)
-        {
-            Die?.Invoke();
+        {            
+            Die();
         }
         else
         {
@@ -53,5 +53,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
         } 
 
         Debug.Log(_currentHealth);
+    }
+
+    public void Die()
+    {
+        Died?.Invoke();
     }
 }

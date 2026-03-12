@@ -27,17 +27,35 @@ public static class AssetProvider
     {
         ParticleDamageImpact,
         PartcleDamageText,
-        GroundHit
+        GroundHit,
+        Explosion,
+        FireBall
     }
     #endregion
 
     #region Enemies
     public enum Enemies
     {
-        HuggyWuggy,
-        TungSahur,
-        CappuccinoAssasino,
-        BallerinaCappuccino
+        //Common
+        Fluriflura,
+        LiriliLaria,
+        NoobiniPizzanini,
+        SvininaBombardino,
+        TimCheese,
+
+        //Rare
+        BanditoBobritto,
+        BonecaAmbalabu,
+        PipiAvocado,
+        TricTracBaraboom,
+        TungTungTungSahur,
+
+        //Epic
+        BananitaDolphinita,
+        BrrBrrPatapim,
+        BrriBrriBicusDicusBombicus,
+        CappuccinoAssassino,
+        PerochelloLemonchello
     }
     #endregion
 
@@ -48,7 +66,9 @@ public static class AssetProvider
         Attack,
         PlayerTakeDamage,
         Jump,
-        AttackMiss
+        AttackMiss,
+        Explosion,
+        Shooting
     }
     #endregion
 
