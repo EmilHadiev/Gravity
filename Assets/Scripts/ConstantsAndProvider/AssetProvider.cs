@@ -68,7 +68,8 @@ public static class AssetProvider
         Jump,
         AttackMiss,
         Explosion,
-        Shooting
+        Shooting,
+        Slip
     }
     #endregion
 

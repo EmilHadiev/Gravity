@@ -1,6 +1,6 @@
 using Zenject;
 
-public class SvininaBombardinoAbility : EnemyAbilityActivator
+public class ExplosionEnemyAbility : EnemyAbilityActivator
 {
     private EnemyExplosionLogic _enemyExplosionLogic;
     private IHealth _health;
@@ -35,7 +35,7 @@ public class SvininaBombardinoAbility : EnemyAbilityActivator
         _health.Die();
     }
 
-    private float GetDamage()
+    protected virtual float GetDamage()
     {
         int damageMultiplyer = 2;
         return _data.Damage * damageMultiplyer;

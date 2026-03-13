@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyExplosionLogic
 {
-    private const int Radius = 10;
+    private const int Radius = 5;
     private const int MaxTargets = 10;
     private readonly LayerMask _masks;
 
