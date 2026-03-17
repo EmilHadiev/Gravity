@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368e52c130da23e45b4c05649d20c0c8, type: 3}
   m_Name: HammerSword
   m_EditorClassIdentifier: 
-  <Sword>k__BackingField: 7
   <IsPurchase>k__BackingField: 1
+  <Price>k__BackingField: 9000
+  <Sword>k__BackingField: 7
   <Color>k__BackingField: {r: 0.7137255, g: 0.5411765, b: 0.07450981, a: 1}
   Damage: 80
   PushDistance: 15
-  Price: 9000

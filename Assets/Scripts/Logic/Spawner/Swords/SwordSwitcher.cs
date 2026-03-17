@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
@@ -8,7 +9,11 @@ public class SwordSwitcher : MonoBehaviour
     [SerializeField] private SwitcherView _view;
     [SerializeField] private SwordInfoView _swordInfoView;
 
-    private AssetProvider.Swords _newSword;
+    private SwordData _data;
+    private ISwordSwitcher _switcher;
+
+    public event Action<ItemData> PlayerEntered;
+    public event Action PlayerExited;
 
     private void OnValidate()
     {
@@ -20,25 +25,47 @@ public class SwordSwitcher : MonoBehaviour
     private void OnEnable()
     {
         _observer.Entered += OnPlayerEntered;
+        _observer.Exited += OnPlayerExited;
     }
 
     private void OnDisable()
     {
         _observer.Entered -= OnPlayerEntered;
+        _observer.Exited -= OnPlayerExited;
     }
 
     public void ShowSwordInfo(SwordData swordData)
     {
-        _swordInfoView.SetData(swordData);
+        _data = swordData;
+        _swordInfoView.SetData(_data);
 
-        _newSword = swordData.Sword;
-        _view.CreateSwordView(_newSword);
+        _view.CreateSwordView(_data.Sword);
         
+    }
+
+    public bool TryChangeSword(string swordName)
+    {
+        bool result = _data.Sword.ToString() == swordName;
+
+        if (result)
+        {
+            _switcher.Switch(_data.Sword);
+        }
+
+        return result;
     }
 
     private void OnPlayerEntered(Collider collider)
     {
-        if (collider.TryGetComponent(out ISwordSwitcher swordChanger))
-            swordChanger.Switch(_newSword);
+        if (collider.TryGetComponent(out ISwordSwitcher switcher))
+        {
+            _switcher = switcher;
+            PlayerEntered?.Invoke(_data);
+        }   
+    }
+
+    private void OnPlayerExited(Collider collider)
+    {
+        PlayerExited?.Invoke();
     }
 }

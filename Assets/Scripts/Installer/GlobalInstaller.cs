@@ -21,6 +21,18 @@ public class GlobalInstaller : MonoInstaller
         BindSound();
         BindGameOverService();
         BindSceneLoader();
+        BindCoinStorage();
+        BindPauseService();
+    }
+
+    private void BindPauseService()
+    {
+        Container.BindInterfacesTo<PauseService>().AsSingle();
+    }
+
+    private void BindCoinStorage()
+    {
+        Container.BindInterfacesTo<CoinStorage>().AsSingle();
     }
 
     private void BindSceneLoader()

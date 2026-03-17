@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368e52c130da23e45b4c05649d20c0c8, type: 3}
   m_Name: SwordDiamond
   m_EditorClassIdentifier: 
-  <Sword>k__BackingField: 3
   <IsPurchase>k__BackingField: 1
+  <Price>k__BackingField: 1000
+  <Sword>k__BackingField: 3
   <Color>k__BackingField: {r: 0.14509805, g: 0.74509805, b: 0.7137255, a: 1}
   Damage: 20
   PushDistance: 6
-  Price: 2000
