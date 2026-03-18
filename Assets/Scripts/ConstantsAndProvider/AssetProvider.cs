@@ -69,7 +69,9 @@ public static class AssetProvider
         AttackMiss,
         Explosion,
         Shooting,
-        Slip
+        Slip,
+        Click,
+        AddCoins
     }
     #endregion
 

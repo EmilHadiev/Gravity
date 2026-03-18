@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368e52c130da23e45b4c05649d20c0c8, type: 3}
   m_Name: SwordNether
   m_EditorClassIdentifier: 
-  <IsPurchase>k__BackingField: 1
+  <IsPurchase>k__BackingField: 0
   <Price>k__BackingField: 2500
   <Sword>k__BackingField: 4
   <Color>k__BackingField: {r: 0.4641509, g: 0.27936628, b: 0.4641509, a: 1}

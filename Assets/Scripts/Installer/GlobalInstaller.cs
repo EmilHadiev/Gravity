@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -10,6 +9,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private SwordData[] _swords;
     [SerializeField] private PlayerSoundContainer _playerSound;
     [SerializeField] private EnemySoundContainer _enemySound;
+    [SerializeField] private UISoundContainer _uiSound;
 
     public override void InstallBindings()
     {
@@ -49,6 +49,7 @@ public class GlobalInstaller : MonoInstaller
     {
         Container.BindInterfacesTo<PlayerSoundContainer>().FromComponentInNewPrefab(_playerSound).AsSingle();
         Container.BindInterfacesTo<EnemySoundContainer>().FromComponentInNewPrefab(_enemySound).AsSingle();
+        Container.BindInterfacesTo<UISoundContainer>().FromComponentInNewPrefab(_uiSound).AsSingle();
     }
 
     private void BindSwordData()

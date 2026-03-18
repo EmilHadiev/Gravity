@@ -3,11 +3,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(TriggerObserver))]
 [RequireComponent(typeof(SwitcherView))]
+[RequireComponent(typeof(MaterialColorChanger))]
 public class SwordSwitcher : MonoBehaviour
 {
     [SerializeField] private TriggerObserver _observer;
     [SerializeField] private SwitcherView _view;
     [SerializeField] private SwordInfoView _swordInfoView;
+    [SerializeField] private MaterialColorChanger _colorChanger;
 
     private SwordData _data;
     private ISwordSwitcher _switcher;
@@ -20,6 +22,7 @@ public class SwordSwitcher : MonoBehaviour
         _observer ??= GetComponent<TriggerObserver>();
         _view ??= GetComponent<SwitcherView>();
         _swordInfoView ??= GetComponentInChildren<SwordInfoView>();
+        _colorChanger ??= GetComponent<MaterialColorChanger>();
     }
 
     private void OnEnable()
@@ -40,7 +43,7 @@ public class SwordSwitcher : MonoBehaviour
         _swordInfoView.SetData(_data);
 
         _view.CreateSwordView(_data.Sword);
-        
+        TrySetPurchaseColor();
     }
 
     public bool TryChangeSword(string swordName)
@@ -50,6 +53,7 @@ public class SwordSwitcher : MonoBehaviour
         if (result)
         {
             _switcher.Switch(_data.Sword);
+            TrySetPurchaseColor();
         }
 
         return result;
@@ -67,5 +71,14 @@ public class SwordSwitcher : MonoBehaviour
     private void OnPlayerExited(Collider collider)
     {
         PlayerExited?.Invoke();
+    }
+
+    private void TrySetPurchaseColor()
+    {
+        if (_data.IsPurchase)
+        {
+            Color gold = new Color(1, 0.8392157f, 0, 1);
+            _colorChanger.SetColor(color: gold);
+        }        
     }
 }
