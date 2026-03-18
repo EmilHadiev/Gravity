@@ -1141,6 +1141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 1328248904}
+  _shopWindow: {fileID: 510431216}
 --- !u!4 &743049928
 Transform:
   m_ObjectHideFlags: 0
@@ -2430,7 +2431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1608967151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2504,7 +2505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fada7d55ba85c14ea3f8752b4863657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvas: {fileID: 510431214}
   _priceText: {fileID: 1067512446}
   _purchaseButton: {fileID: 24531596}
   _rejectButton: {fileID: 1746163209}
