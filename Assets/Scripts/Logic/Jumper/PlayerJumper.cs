@@ -15,6 +15,8 @@ public class PlayerJumper : MonoBehaviour
 
     [Header("Ground Detection")]
     [SerializeField] private float _groundCheckDistance = 0.2f;
+    [SerializeField] private float _rayOffset = 0.1f;
+    
 
     private const string GroundMask = "Ground";
 
@@ -66,7 +68,10 @@ public class PlayerJumper : MonoBehaviour
     private void TryJump()
     {
         if (IsGrounded() == false)
+        {
+            Debug.Log("Я НЕ НА ЗЕМЛЕ!!!");
             return;
+        }    
 
         _isJumpRequested = true;
         _landingLogic.Activate();
@@ -102,5 +107,25 @@ public class PlayerJumper : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.RaycastNonAlloc(transform.position + Vector3.up * 0.1f, Vector3.down, _groundResults, _groundCheckDistance, _groundMask) > 0;
+    }
+
+    // --- НОВЫЙ МЕТОД ДЛЯ ВИЗУАЛИЗАЦИИ ---
+    private void OnDrawGizmos()
+    {
+        // Устанавливаем цвет луча: зеленый, если на земле, красный, если в воздухе
+        // В редакторе (не во время игры) Awake не вызывается, поэтому проверяем маску вручную
+        if (_groundMask == 0) _groundMask = LayerMask.GetMask(GroundMask);
+
+        bool grounded = IsGrounded();
+        Gizmos.color = grounded ? Color.green : Color.red;
+
+        Vector3 origin = transform.position + Vector3.up * _rayOffset;
+        Vector3 direction = Vector3.down * _groundCheckDistance;
+
+        // Рисуем линию луча
+        Gizmos.DrawRay(origin, direction);
+
+        // Дополнительно рисуем маленькую сферу в точке, куда максимально дотягивается луч
+        Gizmos.DrawSphere(origin + direction, 0.05f);
     }
 }

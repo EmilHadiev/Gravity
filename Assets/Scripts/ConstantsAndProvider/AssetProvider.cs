@@ -3,7 +3,9 @@ public static class AssetProvider
     public enum Player
     {
         Player,
-        PlayerObby
+        PlayerObby,
+        Herobrine,
+        Jojo
     };
 
     #region Swords
