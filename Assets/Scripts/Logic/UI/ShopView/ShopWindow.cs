@@ -5,9 +5,11 @@ using Zenject;
 
 public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 {
-    [SerializeField] private PurchaseWindow _purchaseWindow;
+    [SerializeField] private SwordPurchaseWindow _swordPurchaseWindow;
+    [SerializeField] private SkinPurchaseWindow _skinPurchaseWindow;
 
     [Inject] private readonly ISwordSwitchContainer _swordSwitcher;
+    [Inject] private readonly ISkinSwitcherContainer _skinSwitcher;
 
     private readonly Dictionary<Type, IShopWindowState> _states = new Dictionary<Type, IShopWindowState>();
     private IShopWindowState _currentState;
@@ -17,7 +19,11 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
         _swordSwitcher.PlayerEntered += OnSwordSwitchContainerEntered;
         _swordSwitcher.PlayerExited += OnPlayerExited;
 
-        _states.Add(typeof(PurchaseWindow), _purchaseWindow);
+        _skinSwitcher.PlayerEntered += OnSkinSwitchContainerEntered;
+        _skinSwitcher.PlayerExited += OnPlayerExited;
+
+        _states.Add(typeof(SwordPurchaseWindow), _swordPurchaseWindow);
+        _states.Add(typeof(SkinPurchaseWindow), _skinPurchaseWindow);
         _states.Add(typeof(EmptyShopState), new EmptyShopState());
 
         OnPlayerExited();
@@ -27,6 +33,9 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
     {
         _swordSwitcher.PlayerEntered -= OnSwordSwitchContainerEntered;
         _swordSwitcher.PlayerExited -= OnPlayerExited;
+
+        _skinSwitcher.PlayerEntered -= OnSkinSwitchContainerEntered;
+        _skinSwitcher.PlayerExited -= OnPlayerExited;
     }
 
     public void Switch<T>() where T : IShopWindowState
@@ -43,10 +52,21 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
         }
     }
 
+    private void OnSwordSwitcherContainerEntered()
+    {
+        throw new NotImplementedException();
+    }
+
     private void OnSwordSwitchContainerEntered(ItemData data)
     {
-        _purchaseWindow.SetData(data);
-        Switch<PurchaseWindow>();
+        _swordPurchaseWindow.SetData(data);
+        Switch<SwordPurchaseWindow>();
+    }
+
+    private void OnSkinSwitchContainerEntered(ItemData data)
+    {
+        _skinPurchaseWindow.SetData(data);
+        Switch<SkinPurchaseWindow>();
     }
 
     private void OnPlayerExited()

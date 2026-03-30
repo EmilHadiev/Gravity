@@ -5,7 +5,9 @@ public class MaterialColorChanger : MonoBehaviour
     [SerializeField] private Renderer _renderer;
 
     private MaterialPropertyBlock _propertyBlock;
-    
+
+    public readonly Color Gold = new(1, 0.8392157f, 0, 1);
+
     private void Awake()
     {
         _propertyBlock = new MaterialPropertyBlock();

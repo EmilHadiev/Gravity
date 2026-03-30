@@ -3,7 +3,8 @@ using Zenject;
 
 public class LocalServiceInstaller : MonoInstaller
 {
-    [SerializeField] private SwordSwitchContainer _container;
+    [SerializeField] private SwordSwitchContainer _swordContainer;
+    [SerializeField] private SkinSwitcherContainer _skinContainer;
     [SerializeField] private ShopWindow _shopWindow;
 
     public override void InstallBindings()
@@ -11,7 +12,7 @@ public class LocalServiceInstaller : MonoInstaller
         BindOptimizator();
         BindFactory();
         BindShopWindow();
-        BindSwordContainer();
+        BindContainers();
     }
 
     private void BindShopWindow()
@@ -19,9 +20,10 @@ public class LocalServiceInstaller : MonoInstaller
         Container.BindInterfacesTo<ShopWindow>().FromInstance(_shopWindow).AsSingle();
     }
 
-    private void BindSwordContainer()
+    private void BindContainers()
     {
-        Container.BindInterfacesTo<SwordSwitchContainer>().FromComponentInNewPrefab(_container).AsSingle();
+        Container.BindInterfacesTo<SwordSwitchContainer>().FromInstance(_swordContainer).AsSingle();
+        Container.BindInterfacesTo<SkinSwitcherContainer>().FromInstance(_skinContainer).AsSingle();
     }
 
     private void BindOptimizator()

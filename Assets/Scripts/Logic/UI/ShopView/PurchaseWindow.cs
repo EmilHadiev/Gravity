@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PurchaseWindow : MonoBehaviour, IShopWindowState
+public abstract class PurchaseWindow : MonoBehaviour
 {
     [SerializeField] private TMP_Text _priceText;
     [SerializeField] private Button _purchaseButton;
     [SerializeField] private Button _rejectButton;
 
-    [Inject] private readonly ISwordSwitchContainer _switchContainer;
     [Inject] private readonly ICoinStorage _coinStorage;
     [Inject] private readonly IUISoundContainer _soundContainer;
     [Inject] private readonly IShopWindowStateMachine _windowStateMachine;
@@ -30,7 +29,14 @@ public class PurchaseWindow : MonoBehaviour, IShopWindowState
 
     public void Enter()
     {
-        gameObject.SetActive(true);
+        if (_currentItemData.IsPurchase)
+        {
+            PerformPurchase();
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }  
     }
 
     public void Exit()
@@ -41,22 +47,21 @@ public class PurchaseWindow : MonoBehaviour, IShopWindowState
     public void SetData(ItemData itemData)
     {
         _currentItemData = itemData;
+        _priceText.text = $"{_currentItemData.Price}";
     }
 
     private void TryPurchase()
     {
-        if (_coinStorage.TrySpendCoins(_currentItemData.Price) || _currentItemData.IsPurchase)
-        {
+        if (_coinStorage.TrySpendCoins(_currentItemData.Price))
             PerformPurchase();
-            _windowStateMachine.Switch<EmptyShopState>();
-        }
     }
 
     private void PerformPurchase()
     {
         _currentItemData.IsPurchase = true;
+        ChangeSkin();
         _soundContainer.Play(AssetProvider.Sounds.AddCoins.ToString());
-        _switchContainer.TrySwitchSword();        
+        _windowStateMachine.Switch<EmptyShopState>();
     }
 
     private void RejectPurchase()
@@ -64,4 +69,6 @@ public class PurchaseWindow : MonoBehaviour, IShopWindowState
         _soundContainer.Play(AssetProvider.Sounds.Click.ToString());
         _windowStateMachine.Switch<EmptyShopState>();
     }
+
+    protected abstract void ChangeSkin();
 }

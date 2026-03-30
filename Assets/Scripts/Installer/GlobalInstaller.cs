@@ -7,6 +7,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private EnvData _envData;
     [SerializeField] private SwordData[] _swords;
+    [SerializeField] private SkinData[] _skins;
     [SerializeField] private PlayerSoundContainer _playerSound;
     [SerializeField] private EnemySoundContainer _enemySound;
     [SerializeField] private UISoundContainer _uiSound;
@@ -17,7 +18,7 @@ public class GlobalInstaller : MonoInstaller
         BindPlayerData();
         BindEnvData();
         BindAdv();
-        BindSwordData();
+        BindSkinsData();
         BindSound();
         BindGameOverService();
         BindSceneLoader();
@@ -33,6 +34,7 @@ public class GlobalInstaller : MonoInstaller
     private void BindCoinStorage()
     {
         Container.BindInterfacesTo<CoinStorage>().AsSingle();
+        Container.BindInterfacesTo<GemStorage>().AsSingle();
     }
 
     private void BindSceneLoader()
@@ -52,17 +54,24 @@ public class GlobalInstaller : MonoInstaller
         Container.BindInterfacesTo<UISoundContainer>().FromComponentInNewPrefab(_uiSound).AsSingle();
     }
 
-    private void BindSwordData()
+    private void BindSkinsData()
     {
-        List<SwordData> swords = new List<SwordData>(_swords.Length);
-
+        List<SwordData> swords = new(_swords.Length);
         for (int i = 0; i < _swords.Length; i++)
         {
             var data = Instantiate(_swords[i]);
             swords.Add(data);
         }
 
+        List<SkinData> skins = new(_skins.Length);
+        for (int i = 0; i < _skins.Length; i++)
+        {
+            var data = Instantiate(_skins[i]);
+            skins.Add(data);
+        }
+
         Container.Bind<SwordData[]>().FromInstance(swords.ToArray());
+        Container.Bind<SkinData[]>().FromInstance(skins.ToArray());
     }
 
     private void BindAdv()

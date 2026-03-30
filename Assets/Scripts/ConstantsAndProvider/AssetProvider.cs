@@ -1,11 +1,13 @@
 public static class AssetProvider
 {
+    public const string PlayerViewPrefix = "_View";
+
     public enum Player
     {
-        Player,
         PlayerObby,
         Herobrine,
-        Jojo
+        Jojo,
+        Guard
     };
 
     #region Swords

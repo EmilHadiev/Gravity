@@ -77,8 +77,7 @@ public class SwordSwitcher : MonoBehaviour
     {
         if (_data.IsPurchase)
         {
-            Color gold = new Color(1, 0.8392157f, 0, 1);
-            _colorChanger.SetColor(color: gold);
+            _colorChanger.SetColor(color: _colorChanger.Gold);
         }        
     }
 }
