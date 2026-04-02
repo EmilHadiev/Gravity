@@ -2,6 +2,7 @@ public static class AssetProvider
 {
     public const string PlayerViewPrefix = "_View";
 
+    #region PlayerSkins
     public enum Player
     {
         PlayerObby,
@@ -9,6 +10,16 @@ public static class AssetProvider
         Jojo,
         Guard
     };
+    #endregion
+
+    #region Items
+    public enum Item
+    {
+        Crown,
+        Cape,
+        Glasses
+    }
+    #endregion
 
     #region Swords
     public enum Swords

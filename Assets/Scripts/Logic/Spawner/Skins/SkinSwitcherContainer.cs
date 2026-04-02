@@ -36,8 +36,8 @@ public class SkinSwitcherContainer : MonoBehaviour, ISkinSwitcherContainer
 
             var skinSwitcher = _factory.Create(_skinSwitcherTemplate.gameObject);
             skinSwitcher.transform.parent = transform;
-            skinSwitcher.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            skinSwitcher.transform.position = GetPosition(skinSwitcher.transform, i);
+            skinSwitcher.transform.SetLocalPositionAndRotation
+                (GetPosition(skinSwitcher.transform, i), transform.rotation);
 
             var switcher = skinSwitcher.GetComponent<SkinSwitcher>();
             switcher.SetData(_skins[i]);

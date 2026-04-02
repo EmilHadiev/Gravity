@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkinHerobrine
   m_EditorClassIdentifier: 
   <IsPurchase>k__BackingField: 0
-  <Price>k__BackingField: 99
+  <Price>k__BackingField: 1000
   <Skin>k__BackingField: 1

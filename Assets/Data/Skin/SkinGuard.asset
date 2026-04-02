@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SkinGuard
   m_EditorClassIdentifier: 
   <IsPurchase>k__BackingField: 0
-  <Price>k__BackingField: 99
+  <Price>k__BackingField: 2500
   <Skin>k__BackingField: 3
