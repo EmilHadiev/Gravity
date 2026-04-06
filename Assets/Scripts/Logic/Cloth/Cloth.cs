@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private AssetProvider.Item _item;
+    [SerializeField] private AssetProvider.Cloth _item;
 
-    public AssetProvider.Item ITem => _item;
+    public AssetProvider.Cloth ITem => _item;
 
     /// <summary>
     /// only local

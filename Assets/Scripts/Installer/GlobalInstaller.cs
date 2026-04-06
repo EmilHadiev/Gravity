@@ -8,6 +8,7 @@ public class GlobalInstaller : MonoInstaller
     [SerializeField] private EnvData _envData;
     [SerializeField] private SwordData[] _swords;
     [SerializeField] private SkinData[] _skins;
+    [SerializeField] private ClothData[] _cloths;
     [SerializeField] private PlayerSoundContainer _playerSound;
     [SerializeField] private EnemySoundContainer _enemySound;
     [SerializeField] private UISoundContainer _uiSound;
@@ -70,8 +71,16 @@ public class GlobalInstaller : MonoInstaller
             skins.Add(data);
         }
 
+        List<ClothData> cloths = new(_cloths.Length);
+        for (int i = 0; i < _cloths.Length; i++)
+        {
+            var data = Instantiate(_cloths[i]);
+            cloths.Add(data);
+        }
+
         Container.Bind<SwordData[]>().FromInstance(swords.ToArray());
         Container.Bind<SkinData[]>().FromInstance(skins.ToArray());
+        Container.Bind<ClothData[]>().FromInstance(cloths.ToArray());
     }
 
     private void BindAdv()

@@ -13,7 +13,7 @@ public static class AssetProvider
     #endregion
 
     #region Items
-    public enum Item
+    public enum Cloth
     {
         Crown,
         Cape,

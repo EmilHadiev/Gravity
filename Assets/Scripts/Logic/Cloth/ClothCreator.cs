@@ -25,12 +25,12 @@ public class ItemCreator : MonoBehaviour
         }
     }
 
-    public void CreateItem(AssetProvider.Item item)
+    public void CreateItem(AssetProvider.Cloth item)
     { 
         CreateItemAsync(item).Forget();
     }
 
-    private async UniTask CreateItemAsync(AssetProvider.Item item)
+    private async UniTask CreateItemAsync(AssetProvider.Cloth item)
     {
         var prefab = await _factory.CreateAsync(item.ToString());
         var itemPlace = GetItemPlace(item);
@@ -42,7 +42,7 @@ public class ItemCreator : MonoBehaviour
         itemPrefab.SetPositionAndRotation(itemPlace.Position, itemPlace.Rotation);
     }
 
-    private ItemPlace GetItemPlace(AssetProvider.Item item)
+    private ItemPlace GetItemPlace(AssetProvider.Cloth item)
     {
         var itemPalce = _itemPlaces.FirstOrDefault(i => i.Item == item);
         return itemPalce != null ? itemPalce : throw new ArgumentException(nameof(item));

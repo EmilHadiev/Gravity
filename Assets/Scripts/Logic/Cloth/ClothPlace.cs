@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemPlace : MonoBehaviour
 {
-    public AssetProvider.Item Item;
+    public AssetProvider.Cloth Item;
 
     public Vector3 Scale;
     public Vector3 Position;
