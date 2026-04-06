@@ -52,7 +52,7 @@ public abstract class PurchaseWindow : MonoBehaviour
 
     private void TryPurchase()
     {
-        if (_coinStorage.TrySpendCoins(_currentItemData.Price))
+        if (_coinStorage.TrySpendMoney(_currentItemData.Price))
             PerformPurchase();
     }
 

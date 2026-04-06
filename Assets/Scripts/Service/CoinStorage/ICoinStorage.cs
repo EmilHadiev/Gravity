@@ -1,10 +1,4 @@
-﻿using System;
-
-public interface ICoinStorage
+﻿public interface ICoinStorage : IMoneyStorage
 {
-    event Action<int> CoinsChanged;
-    int Coins { get; }
 
-    void AddCoins(int coins);
-    bool TrySpendCoins(int coins);
 }

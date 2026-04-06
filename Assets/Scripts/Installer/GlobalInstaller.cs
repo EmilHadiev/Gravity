@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -25,6 +26,12 @@ public class GlobalInstaller : MonoInstaller
         BindSceneLoader();
         BindCoinStorage();
         BindPauseService();
+        BindSaveService();
+    }
+
+    private void BindSaveService()
+    {
+        Container.BindInterfacesTo<Saver>().AsSingle();
     }
 
     private void BindPauseService()

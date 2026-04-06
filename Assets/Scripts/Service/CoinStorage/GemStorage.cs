@@ -2,26 +2,26 @@ using System;
 
 public class GemStorage : IGemStorage
 {
-    public int Gems { get; private set; } = 500;
+    public int Money { get; private set; }
 
-    public event Action<int> GemsChanged;
+    public event Action<int> MoneyChanged;
 
-    public void AddCoins(int gems)
+    public void AddMoney(int gems)
     {
         if (gems == 0)
             return;
 
-        Gems += gems;
-        GemsChanged?.Invoke(gems);
+        Money += gems;
+        MoneyChanged?.Invoke(gems);
     }
 
-    public bool TrySpendCoins(int gems)
+    public bool TrySpendMoney(int gems)
     {
-        if (Gems - gems < 0 || gems < 0)
+        if (Money - gems < 0 || gems < 0)
             return false;
 
-        Gems -= gems;
-        GemsChanged?.Invoke(Gems);
+        Money -= gems;
+        MoneyChanged?.Invoke(Money);
         return true;
     }
 }

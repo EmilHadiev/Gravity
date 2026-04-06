@@ -1,8 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -11,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class AddressablesSceneLoader : ISceneLoader
 {
+    private readonly ISavable _saver;
+
     // Храним ID текущей сцены для рестарта
     private string _currentSceneId;
 
@@ -20,11 +19,12 @@ public class AddressablesSceneLoader : ISceneLoader
     // Ссылка на handle последней загруженной сцены (опционально, для сложного управления памятью)
     private AsyncOperationHandle<SceneInstance> _currentSceneHandle;
 
-    public AddressablesSceneLoader()
+    public AddressablesSceneLoader(ISavable saver)
     {
         // Если игра запускается не с пустой сцены, можно попробовать инициализировать _currentSceneId
         // именем активной сцены, но для Addressables лучше использовать явные ключи.
         _currentSceneId = SceneManager.GetActiveScene().name;
+        _saver = saver;
     }
 
     public void SwitchTo(string sceneName)
@@ -93,7 +93,7 @@ public class AddressablesSceneLoader : ISceneLoader
     private void SceneLoadingLogic()
     {
         Debug.Log($"[SceneLoader] Сцена '{_currentSceneId}' успешно загружена и инициализирована.");
-
+        _saver.Save();
         // Здесь можно вызвать сборщик мусора, если это критично для памяти на слабых телефонах,
         // хотя Addressables обычно хорошо управляют своей памятью.
         // Resources.UnloadUnusedAssets();

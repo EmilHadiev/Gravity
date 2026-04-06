@@ -1,10 +1,4 @@
-﻿using System;
-
-public interface IGemStorage
+﻿public interface IGemStorage : IMoneyStorage
 {
-    event Action<int> GemsChanged;
-    int Gems { get; }
 
-    void AddCoins(int gems);
-    bool TrySpendCoins(int gems);
 }

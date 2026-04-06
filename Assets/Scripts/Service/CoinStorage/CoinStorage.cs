@@ -2,26 +2,26 @@ using System;
 
 public class CoinStorage : ICoinStorage
 {
-    public int Coins { get; private set; } = 10050;
+    public int Money { get; private set; }
 
-    public event Action<int> CoinsChanged;
+    public event Action<int> MoneyChanged;
 
-    public void AddCoins(int coins)
+    public void AddMoney(int coins)
     {
         if (coins == 0)
             return;
 
-        Coins += coins;
-        CoinsChanged?.Invoke(coins);
+        Money += coins;
+        MoneyChanged?.Invoke(coins);
     }
 
-    public bool TrySpendCoins(int coins)
+    public bool TrySpendMoney(int coins)
     {
-        if (Coins - coins < 0 || coins < 0)
+        if (Money - coins < 0 || coins < 0)
             return false;
 
-        Coins -= coins;
-        CoinsChanged?.Invoke(Coins);
+        Money -= coins;
+        MoneyChanged?.Invoke(Money);
         return true;
     }
 }

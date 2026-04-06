@@ -15,13 +15,13 @@ public class CoinsStorageView : MonoBehaviour
 
     private void OnEnable()
     {
-        _coinStorage.CoinsChanged += OnCoinsChanged;
-        OnCoinsChanged(_coinStorage.Coins);
+        _coinStorage.MoneyChanged += OnCoinsChanged;
+        OnCoinsChanged(_coinStorage.Money);
     }
 
     private void OnDisable()
     {
-        _coinStorage.CoinsChanged -= OnCoinsChanged;
+        _coinStorage.MoneyChanged -= OnCoinsChanged;
     }
 
     private void OnCoinsChanged(int coins)
