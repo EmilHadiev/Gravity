@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -35,14 +34,12 @@ public class AddressablesLoader : IAddressablesLoader, IDisposable
         {
             if (_assets.TryGetValue(assetPath, out var existingHandle))
             {
-                Debug.Log($"Returning an existing asset {assetPath}");
                 return await existingHandle.ToUniTask(cancellationToken: _cts.Token) as T;
             }
 
             var handle = Addressables.LoadAssetAsync<UnityEngine.Object>(assetPath);
             _assets.TryAdd(assetPath, handle);
 
-            Debug.Log($"Load and retrieve the asset {assetPath}");
             return await handle.ToUniTask(cancellationToken: _cts.Token) as T;
         }
         catch (OperationCanceledException)

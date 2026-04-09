@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemPlace : MonoBehaviour
+public class ClothPlace : MonoBehaviour
 {
     public AssetProvider.Cloth Item;
 

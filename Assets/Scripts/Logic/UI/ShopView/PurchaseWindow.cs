@@ -12,6 +12,7 @@ public abstract class PurchaseWindow : MonoBehaviour
     [Inject] private readonly ICoinStorage _coinStorage;
     [Inject] private readonly IUISoundContainer _soundContainer;
     [Inject] private readonly IShopWindowStateMachine _windowStateMachine;
+    [Inject] private readonly ISavable _saver;
 
     private ItemData _currentItemData;
 
@@ -58,10 +59,25 @@ public abstract class PurchaseWindow : MonoBehaviour
 
     private void PerformPurchase()
     {
-        _currentItemData.IsPurchase = true;
         ChangeSkin();
+        TrySave();        
         _soundContainer.Play(AssetProvider.Sounds.AddCoins.ToString());
         _windowStateMachine.Switch<EmptyShopState>();
+    }
+
+    private void TrySave()
+    {
+        if (_currentItemData.IsPurchase == false)
+        {
+            _currentItemData.IsPurchase = true;
+            AdditionalSaveLogic();
+            _saver.Save();
+        }
+    }
+
+    protected virtual void AdditionalSaveLogic()
+    {
+
     }
 
     private void RejectPurchase()

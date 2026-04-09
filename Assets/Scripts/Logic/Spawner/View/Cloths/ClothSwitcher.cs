@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
+using Zenject;
 
 public class ClothSwitcher : ItemSwitcher
 {
     [SerializeField] private Transform _spawnPosition;
+
+    private IItemSetable _itemSetable;
 
     protected override void CreateView()
     {
@@ -17,12 +19,21 @@ public class ClothSwitcher : ItemSwitcher
         prefab.transform.SetPositionAndRotation(_spawnPosition.position, _spawnPosition.rotation);
         prefab.transform.parent = transform;
     }
+    
+    protected override void TrySetOptionToPlayerComponent(Collider collider)
+    {
+        base.TrySetOptionToPlayerComponent(collider);
 
-    public bool TrySetItem(string itemName, Action ChangeItem)
+        if (collider.TryGetComponent(out IItemSetable itemSetable))
+            _itemSetable = itemSetable;
+    }
+
+    public bool TrySetItem(string itemName)
     {
         if (itemName == Data.ItemName)
         {
-            ChangeItem?.Invoke();
+            _itemSetable?.SetItem(itemName);
+            ChangeColor();
             return true;
         }
 

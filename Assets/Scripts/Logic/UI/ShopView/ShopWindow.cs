@@ -7,9 +7,11 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 {
     [SerializeField] private SwordPurchaseWindow _swordPurchaseWindow;
     [SerializeField] private SkinPurchaseWindow _skinPurchaseWindow;
+    [SerializeField] private ClothPurchaseWindow _clothPurchaseWindow;
 
     [Inject] private readonly ISwordSwitchContainer _swordSwitcher;
     [Inject] private readonly ISkinSwitcherContainer _skinSwitcher;
+    [Inject] private readonly IClothSwitcherContainer _clothSwitcher;
 
     private readonly Dictionary<Type, IShopWindowState> _states = new Dictionary<Type, IShopWindowState>();
     private IShopWindowState _currentState;
@@ -22,8 +24,12 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
         _skinSwitcher.PlayerEntered += OnSkinSwitchContainerEntered;
         _skinSwitcher.PlayerExited += OnPlayerExited;
 
+        _clothSwitcher.PlayerEntered += OnClothSwitchContainerEntered;
+        _clothSwitcher.PlayerExited += OnPlayerExited;
+
         _states.Add(typeof(SwordPurchaseWindow), _swordPurchaseWindow);
         _states.Add(typeof(SkinPurchaseWindow), _skinPurchaseWindow);
+        _states.Add(typeof(ClothPurchaseWindow), _clothPurchaseWindow);
         _states.Add(typeof(EmptyShopState), new EmptyShopState());
 
         OnPlayerExited();
@@ -36,6 +42,9 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 
         _skinSwitcher.PlayerEntered -= OnSkinSwitchContainerEntered;
         _skinSwitcher.PlayerExited -= OnPlayerExited;
+
+        _clothSwitcher.PlayerEntered -= OnClothSwitchContainerEntered;
+        _clothSwitcher.PlayerExited -= OnPlayerExited;
     }
 
     public void Switch<T>() where T : IShopWindowState
@@ -52,11 +61,6 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
         }
     }
 
-    private void OnSwordSwitcherContainerEntered()
-    {
-        throw new NotImplementedException();
-    }
-
     private void OnSwordSwitchContainerEntered(ItemData data)
     {
         _swordPurchaseWindow.SetData(data);
@@ -67,6 +71,12 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
     {
         _skinPurchaseWindow.SetData(data);
         Switch<SkinPurchaseWindow>();
+    }
+
+    private void OnClothSwitchContainerEntered(ItemData data)
+    {
+        _clothPurchaseWindow.SetData(data);
+        Switch<ClothPurchaseWindow>();
     }
 
     private void OnPlayerExited()

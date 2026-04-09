@@ -51,6 +51,15 @@ public abstract class ItemSwitcher : MonoBehaviour
         }
     }
 
-    private void OnPlayerEntered(Collider collider) => PlayerEntered?.Invoke(Data);
-    private void OnPlayerExited(Collider collider) => PlayerExited?.Invoke();
+    protected void OnPlayerEntered(Collider collider)
+    {
+        TrySetOptionToPlayerComponent(collider);
+        PlayerEntered?.Invoke(Data);
+    }
+    protected void OnPlayerExited(Collider collider) => PlayerExited?.Invoke();
+
+    protected virtual void TrySetOptionToPlayerComponent(Collider collider)
+    {
+
+    }
 }

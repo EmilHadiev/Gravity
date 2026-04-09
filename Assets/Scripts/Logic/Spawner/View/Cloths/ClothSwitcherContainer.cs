@@ -7,11 +7,11 @@ using Zenject;
 public class ClothSwitcherContainer : MonoBehaviour, IClothSwitcherContainer
 {
     [SerializeField] private float _additionalX = 10;
-    [SerializeField] private ClothSwitcher _clothSwitcherPrefab;
+    [SerializeField] private ItemSwitcher _clothSwitcherPrefab;
 
     [Inject] private readonly IFactory _factory;
     [Inject] private readonly ClothData[] _clothesData;
-    
+
     private readonly List<ClothSwitcher> _clothesSwitchers = new(3);
 
     private ItemData _currentData;
@@ -26,7 +26,16 @@ public class ClothSwitcherContainer : MonoBehaviour, IClothSwitcherContainer
 
     public void TrySwitchItem()
     {
-        
+        for (int i = 0; i < _clothesSwitchers.Count; i++)
+        {
+            if (_clothesSwitchers[i].TrySetItem(_currentData.ItemName))
+            {
+                SetClothToPlayer(_currentData.ItemName);
+                return;
+            }
+        }
+
+        throw new ArgumentException(nameof(_currentData.ItemName));
     }
 
     private async UniTask CreateTemplates()
@@ -74,5 +83,17 @@ public class ClothSwitcherContainer : MonoBehaviour, IClothSwitcherContainer
     private void OnPlayerExited()
     {
         PlayerExited?.Invoke();
+    }
+
+    private void SetClothToPlayer(string itemName)
+    {
+        for (int i = 0; i < _clothesData.Length; i++)
+        {
+            if (_clothesData[i].ItemName == itemName)
+            {
+                _clothesData[i].IsEquping = true;
+                break;
+            }
+        }
     }
 }

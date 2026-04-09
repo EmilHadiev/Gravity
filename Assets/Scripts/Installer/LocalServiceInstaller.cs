@@ -5,6 +5,7 @@ public class LocalServiceInstaller : MonoInstaller
 {
     [SerializeField] private SwordSwitchContainer _swordContainer;
     [SerializeField] private SkinSwitcherContainer _skinContainer;
+    [SerializeField] private ClothSwitcherContainer _clothSwitcherContainer;
     [SerializeField] private ShopWindow _shopWindow;
 
     public override void InstallBindings()
@@ -24,6 +25,7 @@ public class LocalServiceInstaller : MonoInstaller
     {
         Container.BindInterfacesTo<SwordSwitchContainer>().FromInstance(_swordContainer).AsSingle();
         Container.BindInterfacesTo<SkinSwitcherContainer>().FromInstance(_skinContainer).AsSingle();
+        Container.BindInterfacesTo<ClothSwitcherContainer>().FromInstance(_clothSwitcherContainer).AsSingle();
     }
 
     private void BindOptimizator()
