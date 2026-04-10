@@ -3,12 +3,12 @@ using System.Linq;
 
 public class ClothSaveLogic : IItemSaveLogic
 {
-    private readonly List<ItemSaveData> _items;
+    private readonly List<ClothSaveData> _items;
     private readonly ClothData[] _clothData;
 
     private readonly Dictionary<string, ClothData> _clothConfigDict;
 
-    public ClothSaveLogic(List<ItemSaveData> items, ClothData[] clothData)
+    public ClothSaveLogic(List<ClothSaveData> items, ClothData[] clothData)
     {
         _items = items;
         _clothData = clothData;
@@ -50,22 +50,20 @@ public class ClothSaveLogic : IItemSaveLogic
 
         foreach (var cloth in _clothData)
         {
-            if (itemSaveDict.TryGetValue(cloth.ItemName, out ItemSaveData savedItem))
+            if (itemSaveDict.TryGetValue(cloth.ItemName, out ClothSaveData savedItem))
             {
                 cloth.IsPurchase = savedItem.IsPurchase;
-                cloth.Price = savedItem.Price;
                 cloth.IsEquping = savedItem.IsEquping;
             }
         }
     }
 
-    private ItemSaveData CreateSaveData(ClothData data)
+    private ClothSaveData CreateSaveData(ClothData data)
     {
-        return new ItemSaveData
+        return new ClothSaveData
         {
             ItemName = data.ItemName,
             IsPurchase = data.IsPurchase,
-            Price = data.Price,
             IsEquping = data.IsEquping
         };
     }

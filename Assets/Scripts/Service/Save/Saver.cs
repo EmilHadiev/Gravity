@@ -8,15 +8,20 @@ public class Saver : ISavable, IDisposable
     private readonly IGemStorage _gemStorage;
 
     private readonly IItemSaveLogic _clothSave;
+    private readonly IItemSaveLogic _swordsSave;
+    private readonly IItemSaveLogic _skinSave;
 
-    public Saver(PlayerData playerData, ICoinStorage coinStorage, IGemStorage gemStorage, ClothData[] _clothes)
+    public Saver(PlayerData playerData, ICoinStorage coinStorage, IGemStorage gemStorage, 
+        ClothData[] clothes, SkinData[] skins, SwordData[] swords)
     {
         _playerData = playerData;
         _coinStorage = coinStorage;
         _gemStorage = gemStorage;
 
-        var saves = YG2.saves;
-        _clothSave = new ClothSaveLogic(saves.Clothes, _clothes);
+        SavesYG saves = YG2.saves;
+        _clothSave = new ClothSaveLogic(saves.Clothes, clothes);
+        _swordsSave = new SwordSaveLogic(saves.Swords, swords, _playerData);
+        _skinSave = new SkinSaveLogic(saves.Skins, skins, _playerData);
     }
 
     public void Load()
@@ -46,17 +51,14 @@ public class Saver : ISavable, IDisposable
     #region Money
     private void LoadMoney()
     {
-        _playerData.Coins = YG2.saves.Coins;
-        _playerData.Gems = YG2.saves.Gems;
-
-        _coinStorage.AddMoney(_playerData.Coins);
-        _gemStorage.AddMoney(_playerData.Gems);
+        _coinStorage.AddMoney(YG2.saves.Coins);
+        _gemStorage.AddMoney(YG2.saves.Gems);
     }
 
     private void SaveMoney()
     {
-        YG2.saves.Gems = _playerData.Gems;
-        YG2.saves.Coins = _playerData.Coins;
+        YG2.saves.Gems = _gemStorage.Money;
+        YG2.saves.Coins = _coinStorage.Money;
     }
     #endregion
 
@@ -64,11 +66,15 @@ public class Saver : ISavable, IDisposable
     private void SaveItems()
     {
         _clothSave.Save();
+        _swordsSave.Save();
+        _skinSave.Save();
     }
 
     private void LoadItems()
     {
         _clothSave.Load();
+        _swordsSave.Load();
+        _skinSave.Load();
     }
     #endregion
 }

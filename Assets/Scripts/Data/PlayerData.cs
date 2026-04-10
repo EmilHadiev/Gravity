@@ -14,6 +14,4 @@ public class PlayerData : ScriptableObject
     [field: SerializeField] public float AttackRadius { get; set; } = 3f;
     [field: SerializeField] public AssetProvider.Swords Swords { get; set; }
     [field: SerializeField] public AssetProvider.Player Player { get; set; }
-    [field: SerializeField] public int Coins { get; set; }
-    [field: SerializeField] public int Gems { get; set; }
 }

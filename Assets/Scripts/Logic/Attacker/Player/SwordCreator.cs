@@ -17,7 +17,6 @@ public class SwordCreator
 
     private List<SwordSpawnPoint> _spawnPoints;
     private Sword _currentSword;
-    private string _currentSwordName;
 
     public SwordCreator(Transform player,IFactory factory, SwordSpawnPoint spawnPoint, PlayerData playerData, SwordData[] swordsData, float radius = 4f, float yPos = 3f)
     {
@@ -74,8 +73,6 @@ public class SwordCreator
 
             _currentSword = prefab.GetComponent<Sword>();
         }
-
-        _currentSwordName = GetCurrentSwordName();
     }
 
     private string GetCurrentSwordName()
