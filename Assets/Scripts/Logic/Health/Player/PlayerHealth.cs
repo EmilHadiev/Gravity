@@ -50,9 +50,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             DamageApllied?.Invoke(damage);
             _playerSound.PlayWhenFree(AssetProvider.Sounds.PlayerTakeDamage.ToString());
-        } 
-
-        Debug.Log(_currentHealth);
+        }
     }
 
     public void Die()

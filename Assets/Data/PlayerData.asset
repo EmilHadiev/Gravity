@@ -20,14 +20,5 @@ MonoBehaviour:
   <MaxAttackTargets>k__BackingField: 10
   <AttackRange>k__BackingField: 2
   <AttackRadius>k__BackingField: 7
-  <Swords>k__BackingField: 3
-  <Player>k__BackingField: 3
-  <Clothes>k__BackingField:
-  - ClothName: 0
-    isDressed: 0
-  - ClothName: 1
-    isDressed: 0
-  - ClothName: 2
-    isDressed: 0
-  <Coins>k__BackingField: 0
-  <Gems>k__BackingField: 0
+  <Swords>k__BackingField: 0
+  <Player>k__BackingField: 0

@@ -17,4 +17,4 @@ MonoBehaviour:
   <Sword>k__BackingField: 8
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   Damage: 50
-  PushDistance: 8
+  PushDistance: 13
