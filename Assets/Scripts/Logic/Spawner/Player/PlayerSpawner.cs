@@ -10,6 +10,8 @@ public class PlayerSpawner : MonoBehaviour, IPlayerSpawner
     private IFactory _factory;
     private PlayerData _data;
 
+    public IPlayer Player { get; private set; }
+
     [Inject]
     private void Constructor(IFactory factory, PlayerData playerData)
     {
@@ -29,8 +31,9 @@ public class PlayerSpawner : MonoBehaviour, IPlayerSpawner
         prefab.transform.rotation = transform.rotation;
 
         IPlayer player = prefab.GetComponent<IPlayer>();
+        Player = player;
 
         cameraFollower.SetTarget(prefab.transform);
-        PlayerSpawned?.Invoke(player);
+        PlayerSpawned?.Invoke(Player);
     }
 }
