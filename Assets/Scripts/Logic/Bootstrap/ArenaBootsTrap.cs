@@ -3,9 +3,10 @@ using Zenject;
 
 public class ArenaBootsTrap : MonoBehaviour
 {
-    [SerializeField] private PlayerSpawner _playerSpawner;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private CameraFollower _camera;
+
+    [Inject] private readonly IPlayerSpawner _playerSpawner;
 
     private void OnEnable()
     {
@@ -32,7 +33,7 @@ public class ArenaBootsTrap : MonoBehaviour
         _enemySpawner.Spawn();
     }
 
-    private void OnPlayerSpawned()
+    private void OnPlayerSpawned(IPlayer player)
     {
         SpawnEnemy();
     }

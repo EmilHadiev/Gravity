@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,7 @@ public class LocalServiceInstaller : MonoInstaller
     [SerializeField] private SkinSwitcherContainer _skinContainer;
     [SerializeField] private ClothSwitcherContainer _clothSwitcherContainer;
     [SerializeField] private ShopWindow _shopWindow;
+    [SerializeField] private PlayerSpawner _playerSpawner;
 
     public override void InstallBindings()
     {
@@ -14,6 +16,12 @@ public class LocalServiceInstaller : MonoInstaller
         BindFactory();
         BindShopWindow();
         BindContainers();
+        BindPlayerSpawner();
+    }
+
+    private void BindPlayerSpawner()
+    {
+        Container.BindInterfacesTo<PlayerSpawner>().FromInstance(_playerSpawner).AsSingle();
     }
 
     private void BindShopWindow()

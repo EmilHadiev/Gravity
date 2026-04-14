@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerAnimator _animator;
     [SerializeField] private PlayerMover _playerMover;
+    [SerializeField] private PathFollower _pathFollower;
 
     private PlayerData _playerData;
 
@@ -21,10 +22,13 @@ public class Player : MonoBehaviour, IPlayer
     public IPlayerAnimator Animator => _animator;
     public IMovable Mover => _playerMover;
 
+    public IPathFollower Follower => _pathFollower;
+
     private void OnValidate()
     {
         _animator ??= GetComponent<PlayerAnimator>();
         _playerMover ??= GetComponent<PlayerMover>();
+        _pathFollower ??= GetComponentInChildren<PathFollower>();
     }
 
     [Inject]

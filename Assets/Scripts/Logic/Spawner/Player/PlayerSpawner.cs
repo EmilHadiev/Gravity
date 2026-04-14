@@ -3,9 +3,9 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class PlayerSpawner : MonoBehaviour
+public class PlayerSpawner : MonoBehaviour, IPlayerSpawner
 {
-    public event Action PlayerSpawned;
+    public event Action<IPlayer> PlayerSpawned;
 
     private IFactory _factory;
     private PlayerData _data;
@@ -19,7 +19,7 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Spawn(ICameraFollower cameraFollower)
     {
-       CreatePlayer(cameraFollower).Forget();
+        CreatePlayer(cameraFollower).Forget();
     }
 
     private async UniTaskVoid CreatePlayer(ICameraFollower cameraFollower)
@@ -28,7 +28,9 @@ public class PlayerSpawner : MonoBehaviour
         prefab.transform.position = transform.position;
         prefab.transform.rotation = transform.rotation;
 
+        IPlayer player = prefab.GetComponent<IPlayer>();
+
         cameraFollower.SetTarget(prefab.transform);
-        PlayerSpawned?.Invoke();
+        PlayerSpawned?.Invoke(player);
     }
 }
