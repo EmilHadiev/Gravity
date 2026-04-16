@@ -10,11 +10,11 @@ public class SkinSaveLogic : ItemSaveLogic
     public override void Save()
     {
         base.Save();
-        YG2.saves.Skin = PlayerData.Player;
+        YG2.saves.CurrentSkin = PlayerData.Player;
     }
 
     protected override void SetItem()
     {
-        PlayerData.Player = YG2.saves.Skin;
+        PlayerData.Player = YG2.saves.CurrentSkin;
     }
 }

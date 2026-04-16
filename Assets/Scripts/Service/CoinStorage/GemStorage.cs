@@ -1,6 +1,6 @@
 using System;
 
-public class GemStorage : IGemStorage
+public class GemStorage : ICrystallStorage
 {
     public int Money { get; private set; }
 

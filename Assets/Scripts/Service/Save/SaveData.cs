@@ -6,14 +6,14 @@ namespace YG
     public partial class SavesYG
     {
         public int Coins = 10000;
-        public int Gems = 150;
+        public int Crystalls = 150;
 
         public List<ClothSaveData> Clothes = new List<ClothSaveData>();
         public List<ItemSaveData> Swords = new List<ItemSaveData>();
         public List<ItemSaveData> Skins = new List<ItemSaveData>();
 
-        public AssetProvider.Swords Sword;
-        public AssetProvider.Player Skin;
+        public AssetProvider.Swords CurrentSword;
+        public AssetProvider.Player CurrentSkin;
     }
 }
 

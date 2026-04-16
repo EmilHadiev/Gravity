@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Glasses
   m_EditorClassIdentifier: 
   <IsPurchase>k__BackingField: 0
-  <Price>k__BackingField: 19
+  <Price>k__BackingField: 9
   <Cloth>k__BackingField: 2
   <IsEquping>k__BackingField: 0

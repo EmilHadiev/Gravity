@@ -98,5 +98,14 @@ public static class AssetProvider
 
     #endregion
 
+    #region CrystallsCount
+    public enum CrystallsCount
+    {
+        Crystall_10 = 10,
+        Crystall_50 = 50,
+        Crystall_100 = 100
+    }
+    #endregion
+
     public const string MobileCanvas = nameof(MobileCanvas);
 }

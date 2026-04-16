@@ -11,11 +11,11 @@ public class SwordSaveLogic : ItemSaveLogic
     public override void Save()
     {
         base.Save();
-        YG2.saves.Sword = PlayerData.Swords;
+        YG2.saves.CurrentSword = PlayerData.Swords;
     }
 
     protected override void SetItem()
     {
-        PlayerData.Swords = YG2.saves.Sword;
+        PlayerData.Swords = YG2.saves.CurrentSword;
     }
 }

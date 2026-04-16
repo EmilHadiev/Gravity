@@ -5,18 +5,18 @@ public class Saver : ISavable, IDisposable
 {
     private readonly PlayerData _playerData;
     private readonly ICoinStorage _coinStorage;
-    private readonly IGemStorage _gemStorage;
+    private readonly ICrystallStorage _crystallStorage;
 
     private readonly IItemSaveLogic _clothSave;
     private readonly IItemSaveLogic _swordsSave;
     private readonly IItemSaveLogic _skinSave;
 
-    public Saver(PlayerData playerData, ICoinStorage coinStorage, IGemStorage gemStorage, 
+    public Saver(PlayerData playerData, ICoinStorage coinStorage, ICrystallStorage gemStorage, 
         ClothData[] clothes, SkinData[] skins, SwordData[] swords)
     {
         _playerData = playerData;
         _coinStorage = coinStorage;
-        _gemStorage = gemStorage;
+        _crystallStorage = gemStorage;
 
         SavesYG saves = YG2.saves;
         _clothSave = new ClothSaveLogic(saves.Clothes, clothes);
@@ -52,12 +52,12 @@ public class Saver : ISavable, IDisposable
     private void LoadMoney()
     {
         _coinStorage.AddMoney(YG2.saves.Coins);
-        _gemStorage.AddMoney(YG2.saves.Gems);
+        _crystallStorage.AddMoney(YG2.saves.Crystalls);
     }
 
     private void SaveMoney()
     {
-        YG2.saves.Gems = _gemStorage.Money;
+        YG2.saves.Crystalls = _crystallStorage.Money;
         YG2.saves.Coins = _coinStorage.Money;
     }
     #endregion

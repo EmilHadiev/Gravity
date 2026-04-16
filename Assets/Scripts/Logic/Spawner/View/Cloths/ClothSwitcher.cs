@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 
 public class ClothSwitcher : ItemSwitcher
 {

@@ -20,5 +20,5 @@ MonoBehaviour:
   <MaxAttackTargets>k__BackingField: 10
   <AttackRange>k__BackingField: 2
   <AttackRadius>k__BackingField: 7
-  <Swords>k__BackingField: 0
+  <Swords>k__BackingField: 8
   <Player>k__BackingField: 0

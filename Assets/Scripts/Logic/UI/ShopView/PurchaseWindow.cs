@@ -9,7 +9,6 @@ public abstract class PurchaseWindow : MonoBehaviour
     [SerializeField] private Button _purchaseButton;
     [SerializeField] private Button _rejectButton;
 
-    [Inject] private readonly ICoinStorage _coinStorage;
     [Inject] private readonly IUISoundContainer _soundContainer;
     [Inject] private readonly IShopWindowStateMachine _windowStateMachine;
     [Inject] private readonly ISavable _saver;
@@ -53,9 +52,11 @@ public abstract class PurchaseWindow : MonoBehaviour
 
     private void TryPurchase()
     {
-        if (_coinStorage.TrySpendMoney(_currentItemData.Price))
+        if (TrySpendMoney(_currentItemData.Price))
             PerformPurchase();
     }
+
+    protected abstract bool TrySpendMoney(int price);
 
     private void PerformPurchase()
     {

@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 {
+    [Header("States")]
     [SerializeField] private SwordPurchaseWindow _swordPurchaseWindow;
     [SerializeField] private SkinPurchaseWindow _skinPurchaseWindow;
     [SerializeField] private ClothPurchaseWindow _clothPurchaseWindow;
+    [SerializeField] private PaymentWindow _paymentWindow;
+    [Header("---")]
+    [SerializeField] private Button _closeButton;
 
     [Inject] private readonly ISwordSwitchContainer _swordSwitcher;
     [Inject] private readonly ISkinSwitcherContainer _skinSwitcher;
@@ -27,9 +32,12 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
         _clothSwitcher.PlayerEntered += OnClothSwitchContainerEntered;
         _clothSwitcher.PlayerExited += OnPlayerExited;
 
+        _closeButton.onClick.AddListener(OnPlayerExited);
+
         _states.Add(typeof(SwordPurchaseWindow), _swordPurchaseWindow);
         _states.Add(typeof(SkinPurchaseWindow), _skinPurchaseWindow);
         _states.Add(typeof(ClothPurchaseWindow), _clothPurchaseWindow);
+        _states.Add(typeof(PaymentWindow), _paymentWindow);
         _states.Add(typeof(EmptyShopState), new EmptyShopState());
 
         OnPlayerExited();
@@ -45,6 +53,8 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 
         _clothSwitcher.PlayerEntered -= OnClothSwitchContainerEntered;
         _clothSwitcher.PlayerExited -= OnPlayerExited;
+
+        _closeButton.onClick.RemoveListener(OnPlayerExited);
     }
 
     public void Switch<T>() where T : IShopWindowState
@@ -63,18 +73,21 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
 
     private void OnSwordSwitchContainerEntered(ItemData data)
     {
+        CloseButtonEnable(true);
         _swordPurchaseWindow.SetData(data);
         Switch<SwordPurchaseWindow>();
     }
 
     private void OnSkinSwitchContainerEntered(ItemData data)
     {
+        CloseButtonEnable(true);
         _skinPurchaseWindow.SetData(data);
         Switch<SkinPurchaseWindow>();
     }
 
     private void OnClothSwitchContainerEntered(ItemData data)
     {
+        CloseButtonEnable(true);
         _clothPurchaseWindow.SetData(data);
         Switch<ClothPurchaseWindow>();
     }
@@ -82,5 +95,11 @@ public class ShopWindow : MonoBehaviour, IShopWindowStateMachine
     private void OnPlayerExited()
     {
         Switch<EmptyShopState>();
+        CloseButtonEnable(false);
+    }
+
+    private void CloseButtonEnable(bool enable)
+    {
+        _closeButton.gameObject.SetActive(enable);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -27,6 +26,12 @@ public class GlobalInstaller : MonoInstaller
         BindCoinStorage();
         BindPauseService();
         BindSaveService();
+        BindPaymentService();
+    }
+
+    private void BindPaymentService()
+    {
+        Container.BindInterfacesTo<PaymentService>().AsSingle();
     }
 
     private void BindSaveService()
@@ -108,7 +113,5 @@ public class GlobalInstaller : MonoInstaller
     private void BindAddresables()
     {
         Container.BindInterfacesTo<AddressablesLoader>().AsSingle();
-    }
-
-    
+    }  
 }
